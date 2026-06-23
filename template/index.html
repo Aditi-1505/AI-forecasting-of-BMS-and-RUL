@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NASA Battery BMS — AI-Driven SOH &amp; RUL Forecasting</title>
+<style>
+  :root {
+    --cream:    #F8F5F0;
+    --parchment:#EDE8DF;
+    --bark:     #8B5E3C;
+    --forest:   #3A6B35;
+    --charcoal: #2C2416;
+    --muted:    #8A7F6A;
+    --border:   #D8D0C4;
+    --eol:      #D85A30;
+    --white:    #FFFFFF;
+    --card-r:   10px;
+    --danger-bg:#FCEBE7;
+    --warn-bg:  #FDF3E0;
+    --good-bg:  #EBF4EA;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* ── top bar ── */
+  .topbar {
+    background: var(--charcoal);
+    color: #E8E0D0;
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .topbar-title { font-size: 17px; font-weight: 700; letter-spacing: .3px; }
+  .topbar-sub   { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .topbar-badges { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .badge {
+    font-size: 11px; font-weight: 600; padding: 3px 9px;
+    border-radius: 20px; white-space: nowrap;
+  }
+  .badge-r2   { background:#2E5C28; color:#C8E6C9; }
+  .badge-rul  { background:#1A3F6E; color:#BBDEFB; }
+  .badge-data { background:#5D3A1A; color:#F5E0C8; }
+
+  /* ── layout ── */
+  .page { display:flex; gap:18px; padding:18px; max-width:1380px; margin:0 auto; }
+  .sidebar { width:310px; flex-shrink:0; display:flex; flex-direction:column; gap:14px; }
+  .main    { flex:1; display:flex; flex-direction:column; gap:14px; }
+
+  /* ── cards ── */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--card-r);
+    padding: 16px;
+  }
+  .card-title {
+    font-size: 11px; font-weight: 700; letter-spacing: .6px;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  /* ── form controls ── */
+  .field       { margin-bottom: 11px; }
+  .field label { font-size: 12px; color: var(--muted); display:block; margin-bottom:3px; }
+  .field input, .field select {
+    width: 100%; padding: 7px 10px;
+    border: 1px solid var(--border); border-radius: 6px;
+    background: var(--cream); color: var(--charcoal);
+    font-size: 13px;
+  }
+  .field input:focus, .field select:focus {
+    outline: none; border-color: var(--forest); background: #fff;
+  }
+  .field .hint { font-size: 11px; color: var(--muted); margin-top:2px; }
+
+  .row2 { display:flex; gap:10px; }
+  .row2 .field { flex:1; }
+
+  /* ── run button ── */
+  .run-btn {
+    width:100%; padding:11px; font-size:14px; font-weight:700;
+    background: var(--forest); color:#fff; border:none;
+    border-radius: 8px; cursor:pointer; transition: background .2s, opacity .2s;
+  }
+  .run-btn:hover { background: #2e5a2a; }
+  .run-btn.loading { opacity:.6; cursor:not-allowed; }
+
+  /* ── stat cards ── */
+  .stats-row { display:flex; gap:12px; flex-wrap:wrap; }
+  .stat-card {
+    flex:1; min-width:130px;
+    background: var(--parchment); border-radius: var(--card-r);
+    padding: 14px 16px; text-align:center;
+  }
+  .stat-label { font-size:11px; color:var(--muted); margin-bottom:4px; font-weight:600; text-transform:uppercase; letter-spacing:.4px; }
+  .stat-value { font-size:26px; font-weight:800; color:var(--bark); }
+  .stat-unit  { font-size:11px; color:var(--muted); margin-top:2px; }
+
+  /* ── health banner ── */
+  .health-banner {
+    background: var(--parchment); border-radius: var(--card-r);
+    padding: 14px 18px; display:flex; align-items:center;
+    justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+  .health-grade  { font-size:22px; font-weight:800; color:var(--charcoal); }
+  .health-detail { font-size:12px; color:var(--muted); margin-top:4px; max-width:380px; }
+  .eol-badge     { font-size:11px; font-weight:700; padding:3px 9px; border-radius:20px; vertical-align:middle; margin-left:6px; }
+  .badge-good    { background:var(--good-bg);   color:#2e5a2a; }
+  .badge-warn    { background:var(--warn-bg);   color:#7a5200; }
+  .badge-danger  { background:var(--danger-bg); color:#9b2a0e; }
+
+  /* ── gauge ── */
+  .gauge-wrap { position:relative; width:170px; height:95px; flex-shrink:0; }
+  .gauge-wrap svg { width:170px; height:95px; }
+  .gauge-label { position:absolute; bottom:4px; left:0; right:0; text-align:center; font-size:22px; font-weight:800; color:var(--bark); }
+
+  /* ── readout table ── */
+  .readout { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:8px; }
+  .r-row   { background:var(--parchment); border-radius:6px; padding:8px 12px; display:flex; justify-content:space-between; align-items:center; }
+  .r-key   { font-size:11px; color:var(--muted); }
+  .r-val   { font-size:13px; font-weight:700; color:var(--charcoal); }
+
+  /* ── EOL alert box ── */
+  .eol-box {
+    border-radius:8px; padding:12px 16px;
+    font-size:13px; display:none; margin-top:2px;
+  }
+  .eol-box.danger { background:var(--danger-bg); color:#7a1a0e; border:1px solid #f5c2b8; }
+  .eol-box.warn   { background:var(--warn-bg);   color:#7a5200; border:1px solid #f5d87a; }
+  .eol-box.good   { background:var(--good-bg);   color:#1e4a1c; border:1px solid #a8d5a5; }
+
+  /* ── charts ── */
+  .charts-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .chart-card  { background:var(--white); border:1px solid var(--border); border-radius:var(--card-r); padding:10px; }
+  .chart-card img { width:100%; border-radius:6px; }
+  .chart-label { font-size:11px; color:var(--muted); text-align:center; margin-bottom:4px; font-weight:600; text-transform:uppercase; }
+
+  /* ── model info panel ── */
+  .info-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+  .info-row  { display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid var(--parchment); }
+  .info-key  { font-size:11px; color:var(--muted); }
+  .info-val  { font-size:12px; font-weight:700; color:var(--charcoal); }
+
+  /* ── toast ── */
+  #toast {
+    position:fixed; bottom:24px; right:24px; padding:10px 18px;
+    background:var(--charcoal); color:#fff; border-radius:8px;
+    font-size:13px; opacity:0; transition:opacity .3s; z-index:999;
+    max-width:300px;
+  }
+  #toast.show { opacity:1; }
+
+  /* ── section divider ── */
+  .section-hdr {
+    font-size:11px; font-weight:700; letter-spacing:.6px; text-transform:uppercase;
+    color:var(--muted); padding:4px 0 8px; border-bottom:1px solid var(--border);
+    margin-bottom:12px;
+  }
+
+  @media(max-width:900px){
+    .page { flex-direction:column; }
+    .sidebar { width:100%; }
+    .charts-grid { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Top Bar ─────────────────────────────────────────────── -->
+<div class="topbar">
+  <div>
+    <div class="topbar-title">NASA Battery BMS — AI-Driven SOH &amp; RUL Forecasting</div>
+  </div>
+ 
+</div>
+
+<div class="page">
+
+ 
+  <div class="sidebar">
+
+    <!-- Measurement Inputs -->
+    <div class="card">
+      <div class="card-title">Cycle Measurements</div>
+
+      <div class="field">
+        <label>Cycle Index</label>
+        <input type="number" id="cycle_index" value="50" min="1" max="500">
+        <div class="hint">Sequential discharge cycle number (1 = fresh)</div>
+      </div>
+
+      <div class="field">
+        <label>Terminal Voltage (V)</label>
+        <input type="number" id="V_measured" value="4.19" step="0.001" min="2.5" max="4.3">
+        <div class="hint">Measured terminal voltage at discharge (B0005 fresh ≈ 4.191 V)</div>
+      </div>
+
+      <div class="field">
+        <label>Cell Temperature (°C)</label>
+        <input type="number" id="T_measured" value="24.3" step="0.1" min="-10" max="60">
+        <div class="hint">Measured cell temperature during discharge</div>
+      </div>
+
+      <div class="field">
+        <label>Ambient Temperature (°C)</label>
+        <select id="temp_preset">
+          <option value="-10">-10 °C (Cold)</option>
+          <option value="0">0 °C (Cold)</option>
+          <option value="10">10 °C (Moderate)</option>
+          <option value="24">24 °C (NASA lab standard)</option>
+          <option value="25">25 °C (Optimal)</option>
+          <option value="30">30 °C (Moderate)</option>
+          <option value="45">45 °C (Hot)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Impedance -->
+    <div class="card">
+      <div class="card-title">Impedance Parameters</div>
+      <div class="hint" style="margin-bottom:10px;font-size:11px;">Interpolated from EIS measurements. Re grows with SEI thickening; Rct grows near EOL.</div>
+
+      <div class="row2">
+        <div class="field">
+          <label>Re — Electrolyte Resistance (Ω)</label>
+          <input type="number" id="Re" value="0.044" step="0.001" min="0.01" max="0.3">
+          <div class="hint">Fresh ≈ 0.044 Ω</div>
+        </div>
+        <div class="field">
+          <label>Rct — Charge-Transfer Resistance (Ω)</label>
+          <input type="number" id="Rct" value="0.069" step="0.001" min="0.01" max="0.5">
+          <div class="hint">Fresh ≈ 0.069 Ω</div>
+        </div>
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label>Re Growth from Baseline (ΔΩ)</label>
+          <input type="number" id="Re_growth" value="0.000" step="0.001" min="-0.01" max="0.1">
+          <div class="hint">Re − Re₀ (0 = fresh)</div>
+        </div>
+        <div class="field">
+          <label>Rct Growth from Baseline (ΔΩ)</label>
+          <input type="number" id="Rct_growth" value="0.000" step="0.001" min="-0.01" max="0.2">
+          <div class="hint">Rct − Rct₀ (0 = fresh)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Derived / State -->
+    <div class="card">
+      <div class="card-title">Derived State Features</div>
+
+      <div class="field">
+        <label>Voltage Drop from Baseline (V)</label>
+        <input type="number" id="V_drop" value="0.000" step="0.001" min="-0.1" max="0.5">
+        <div class="hint">V₀ − V_current. Auto-calculated below ↓ or enter manually.</div>
+      </div>
+
+      <div class="field">
+        <label>Capacity Fade Rate (Ah/cycle)</label>
+        <input type="number" id="cap_fade_rate" value="0.000" step="0.0001" min="-0.2" max="0.2">
+        <div class="hint">ΔCap from previous cycle (negative = fade)</div>
+      </div>
+
+      <div class="field">
+        <label>DoD Proxy (0–1)</label>
+        <input type="number" id="DoD_proxy" value="0.995" step="0.01" min="0" max="1">
+        <div class="hint">(4.2 − V) / (4.2 − 2.5) — depth of discharge</div>
+      </div>
+
+      <div class="field">
+        <label>EOL Proximity (0–1)</label>
+        <input type="number" id="eol_proximity" value="0.297" step="0.01" min="0" max="1.5">
+        <div class="hint">cycle_index / 168  (0 = fresh, 1 = EOL)</div>
+      </div>
+    </div>
+
+    <!-- Auto-fill helper -->
+    <div class="card">
+      <div class="card-title"> Auto-fill Helpers</div>
+      <div class="hint" style="margin-bottom:10px;">Fill derived features from cycle index + voltage automatically.</div>
+      <button class="run-btn" style="background:var(--bark); margin-bottom:8px;" onclick="autoFill()">⟳ Auto-fill Derived Fields</button>
+      <button class="run-btn" id="run-btn" onclick="runPrediction()">▶ Run Prediction</button>
+    </div>
+
+  </div><!-- end sidebar -->
+
+  <div class="main">
+
+    <!-- Stat Cards -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">Capacity</div>
+        <div class="stat-value" id="out-cap">—</div>
+        <div class="stat-unit">Ah predicted</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">SOH</div>
+        <div class="stat-value" id="out-soh">—</div>
+        <div class="stat-unit">% state of health</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">RUL</div>
+        <div class="stat-value" id="out-rul">—</div>
+        <div class="stat-unit">cycles remaining</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Time Remaining</div>
+        <div class="stat-value" id="out-days">—</div>
+        <div class="stat-unit">months (est.)</div>
+      </div>
+    </div>
+
+    <!-- Health Banner -->
+    <div class="health-banner">
+      <div>
+        <div class="health-grade" id="health-grade">
+          Run a prediction
+          <span class="eol-badge badge-good" id="health-badge" style="display:none"></span>
+        </div>
+        <div class="health-detail" id="health-detail">Adjust parameters and click Run Prediction</div>
+      </div>
+      <div class="gauge-wrap">
+        <svg viewBox="0 0 170 95">
+          <path d="M 14 88 A 72 72 0 0 1 156 88"
+                fill="none" stroke="#E8E2D8" stroke-width="13" stroke-linecap="round"/>
+          <path d="M 14 88 A 72 72 0 0 1 156 88"
+                fill="none" stroke="#3A6B35" stroke-width="13"
+                stroke-linecap="round" stroke-dasharray="0 226"
+                id="gauge-arc"/>
+        </svg>
+        <div class="gauge-label" id="gauge-pct">—</div>
+      </div>
+    </div>
+
+    <!-- DoD vs EOL Alert -->
+    <div class="eol-box" id="eol-box"></div>
+
+    <!-- Detailed Readout -->
+    <div class="card">
+      <div class="card-title">📋 Prediction Details</div>
+      <div class="readout" id="readout">
+        <div class="r-row"><span class="r-key">Predicted Capacity</span><span class="r-val" id="r-cap">—</span></div>
+        <div class="r-row"><span class="r-key">Raw (pre-physics) Capacity</span><span class="r-val" id="r-rawcap">—</span></div>
+        <div class="r-row"><span class="r-key">State of Health</span><span class="r-val" id="r-soh">—</span></div>
+        <div class="r-row"><span class="r-key">RUL (cycles)</span><span class="r-val" id="r-rul">—</span></div>
+        <div class="r-row"><span class="r-key">Days Remaining</span><span class="r-val" id="r-days">—</span></div>
+        <div class="r-row"><span class="r-key">Health Grade</span><span class="r-val" id="r-grade">—</span></div>
+        <div class="r-row"><span class="r-key">Temp Factor</span><span class="r-val" id="r-tf">—</span></div>
+        <div class="r-row"><span class="r-key">Cycle Factor</span><span class="r-val" id="r-cf">—</span></div>
+        <div class="r-row"><span class="r-key">At EOL?</span><span class="r-val" id="r-eol">—</span></div>
+        <div class="r-row"><span class="r-key">Near EOL?</span><span class="r-val" id="r-neol">—</span></div>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="card" id="charts-card" style="display:none">
+      <div class="card-title">📈 Visual Analysis</div>
+      <div class="charts-grid" id="charts-grid"></div>
+    </div>
+
+    
+
+  </div><!-- end main -->
+</div><!-- end page -->
+
+<div id="toast"></div>
+
+<script>
+// ── Utilities ────────────────────────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+const fv = id => parseFloat($(id).value) || 0;
+
+function toast(msg, dur = 2500) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), dur);
+}
+
+// ── Auto-fill derived fields from primary inputs ───────────────────────────
+function autoFill() {
+  const ci  = fv('cycle_index');
+  const V   = fv('V_measured');
+  const Re  = fv('Re');
+  const Rct = fv('Rct');
+
+  // Typical fresh-cell baselines from B0005 cycle 1
+  const V0   = 4.191;
+  const Re0  = 0.044;
+  const Rct0 = 0.069;
+
+  $('V_drop').value       = Math.max(0, V0 - V).toFixed(4);
+  $('Re_growth').value    = Math.max(0, Re  - Re0).toFixed(4);
+  $('Rct_growth').value   = Math.max(0, Rct - Rct0).toFixed(4);
+  $('eol_proximity').value = Math.min(1.5, ci / 168.0).toFixed(4);
+  $('DoD_proxy').value    = Math.min(1, Math.max(0, (4.2 - V) / (4.2 - 2.5))).toFixed(4);
+
+  // Estimate a fade rate: typical NASA B0005 ≈ −0.0034 Ah/cycle
+  const estimatedFade = ci > 1 ? -0.0034 : 0.0;
+  $('cap_fade_rate').value = estimatedFade.toFixed(4);
+
+  toast('Derived fields auto-filled ✓');
+}
+
+// ── Build feature payload matching the model's FEATURES list ──────────────
+function getPayload() {
+  const ci  = fv('cycle_index');
+  const V   = fv('V_measured');
+  const Re  = fv('Re');
+  const Rct = fv('Rct');
+
+  return {
+    cycle_index:      ci,
+    V_measured:       V,
+    T_measured:       fv('T_measured'),
+    ambient_temp:     parseFloat(document.getElementById('temp_preset').value),
+    Re:               Re,
+    Rct:              Rct,
+    Re_growth:        fv('Re_growth'),
+    Rct_growth:       fv('Rct_growth'),
+    V_drop:           fv('V_drop'),
+    cap_fade_rate:    fv('cap_fade_rate'),
+    eol_proximity:    fv('eol_proximity'),
+    // Interaction features (computed here to match training)
+    Re_x_Rct:         Re * Rct,
+    Rct_Re_ratio:     Rct / (Re + 1e-9),
+    V_Re_interaction: V * Re,
+    cycle_sq:         ci * ci,
+    // Pass-throughs for physics corrections
+    T_mean:           fv('T_measured'),
+    DoD_proxy:        fv('DoD_proxy'),
+    ambient_temp_C:   parseFloat($('temp_preset').value),
+  };
+}
+
+// ── Gauge update ──────────────────────────────────────────────────────────
+function setGauge(soh) {
+  const arc   = $('gauge-arc');
+  const total = 226;
+  const pct   = Math.min(100, Math.max(0, soh));
+  const dash  = (pct / 100) * total;
+  arc.setAttribute('stroke-dasharray', `${dash} ${total}`);
+  arc.setAttribute('stroke', pct >= 80 ? '#3A6B35' : pct >= 70 ? '#D0742F' : '#D85A30');
+  $('gauge-pct').textContent = pct.toFixed(1) + '%';
+}
+
+// ── Main predict ──────────────────────────────────────────────────────────
+async function runPrediction() {
+  const btn = $('run-btn');
+  btn.classList.add('loading');
+  btn.disabled = true;
+  try {
+    const payload = getPayload();
+    const resp = await fetch('/api/predict', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await resp.json();
+    if (data.status !== 'ok') { toast('Error: ' + data.message, 3500); return; }
+
+    // Stat cards
+    $('out-cap').textContent  = data.predicted_capacity_ah.toFixed(4);
+    $('out-soh').textContent  = data.soh_pct.toFixed(1);
+    $('out-rul').textContent  = data.rul_cycles.toLocaleString();
+    $('out-days').textContent = (data.days_remaining / 30).toFixed(1);
+
+    // Health banner
+    const soh   = data.soh_pct;
+    const grade = data.health_grade;
+    const gradeEl = $('health-grade');
+    const bdg     = $('health-badge');
+    gradeEl.childNodes[0].textContent = grade + ' ';
+    bdg.style.display = 'inline-block';
+    if      (soh >= 80) { bdg.textContent = 'Healthy';   bdg.className = 'eol-badge badge-good'; }
+    else if (soh >= 70) { bdg.textContent = 'Degrading'; bdg.className = 'eol-badge badge-warn'; }
+    else                { bdg.textContent = 'Near EOL';  bdg.className = 'eol-badge badge-danger'; }
+    $('health-detail').textContent =
+      'SOH ' + soh.toFixed(1) + '% — ' + data.predicted_capacity_ah.toFixed(4) +
+      ' Ah of 2.0 Ah rated | RUL ' + data.rul_cycles + ' cycles (' + data.days_remaining.toFixed(0) + ' days)';
+    setGauge(soh);
+
+    // DoD vs EOL alert box
+    const box = $('eol-box');
+    box.style.display = 'block';
+    box.textContent   = '⚠ ' + data.dod_vs_eol;
+    box.className     = 'eol-box ' + (data.at_eol ? 'danger' : data.near_eol ? 'warn' : 'good');
+
+    // Detailed readout
+    $('r-cap').textContent   = data.predicted_capacity_ah.toFixed(4) + ' Ah';
+    $('r-rawcap').textContent = data.raw_capacity_ah.toFixed(4) + ' Ah';
+    $('r-soh').textContent   = data.soh_pct.toFixed(1) + '%';
+    $('r-rul').textContent   = data.rul_cycles.toLocaleString() + ' cycles';
+    $('r-days').textContent  = data.days_remaining.toFixed(1) + ' days';
+    $('r-grade').textContent = data.health_grade;
+    $('r-tf').textContent    = data.temp_factor.toFixed(4);
+    $('r-cf').textContent    = data.cycle_factor.toFixed(4);
+    $('r-eol').textContent   = data.at_eol  ? '⚠ YES' : '✓ No';
+    $('r-neol').textContent  = data.near_eol ? '⚠ YES' : '✓ No';
+
+    // Fetch charts
+    loadCharts(payload, data);
+
+  } catch(e) {
+    toast('Network error: ' + e.message, 3500);
+  } finally {
+    btn.classList.remove('loading');
+    btn.disabled = false;
+  }
+}
+
+// ── Chart loader ──────────────────────────────────────────────────────────
+async function loadCharts(payload, predData) {
+  try {
+    const body = {
+      cycle_index: payload.cycle_index,
+      soh_pct:     predData.soh_pct,
+      predicted_capacity_ah: predData.predicted_capacity_ah,
+    };
+    const resp = await fetch('/api/charts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const charts = await resp.json();
+    if (charts.status !== 'ok') return;
+
+    const grid = $('charts-grid');
+    grid.innerHTML = '';
+
+    const chartDefs = [
+      { key: 'degradation',       label: 'SOH Degradation Curve' },
+      { key: 'actual_vs_pred',    label: 'Actual vs Predicted (Test Set)' },
+      { key: 'feature_importance',label: 'Feature Importance (XGBoost gain)' },
+      { key: 'temperature',       label: 'Temperature Derating Curve' },
+    ];
+
+    chartDefs.forEach(({ key, label }) => {
+      if (!charts[key]) return;
+      const div = document.createElement('div');
+      div.className = 'chart-card';
+      div.innerHTML = `<div class="chart-label">${label}</div><img src="data:image/png;base64,${charts[key]}" alt="${label}">`;
+      grid.appendChild(div);
+    });
+
+    $('charts-card').style.display = 'block';
+  } catch(e) {
+    console.warn('Charts failed:', e);
+  }
+}
+
+// ── Retrain ───────────────────────────────────────────────────────────────
+async function retrain() {
+  toast('Retraining model on NASA data…', 8000);
+  try {
+    const resp = await fetch('/api/retrain', { method: 'POST' });
+    const data = await resp.json();
+    if (data.status === 'ok') {
+      toast(`Retrained ✓  R²=${data.r2.toFixed(4)}  MAE=${data.mae.toFixed(4)} Ah`, 4000);
+      $('mi-r2').textContent  = data.r2.toFixed(4);
+      $('mi-mae').textContent = data.mae.toFixed(4) + ' Ah';
+      $('mi-rmse').textContent = data.rmse.toFixed(4) + ' Ah';
+      $('mi-train').textContent = data.train_n;
+      $('mi-test').textContent  = data.test_n;
+    } else {
+      toast('Retrain failed: ' + data.message, 4000);
+    }
+  } catch(e) {
+    toast('Retrain error: ' + e.message, 4000);
+  }
+}
+
+// Auto-fill on page load for better UX
+window.addEventListener('DOMContentLoaded', () => autoFill());
+</script>
+</body>
+</html>
