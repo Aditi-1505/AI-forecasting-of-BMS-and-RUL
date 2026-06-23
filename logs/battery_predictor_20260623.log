@@ -1,0 +1,724 @@
+2026-06-23 09:51:46  INFO      __main__  XGBoost found — using XGBRegressor
+2026-06-23 09:51:46  INFO      data_loader  ============================================================
+2026-06-23 09:51:46  INFO      data_loader  Loading NASA Battery dataset (3-way split)
+2026-06-23 09:51:46  INFO      data_loader  ============================================================
+2026-06-23 09:51:46  INFO      data_loader  Loading 20 files from 'NASA/Train' …
+2026-06-23 09:51:47  INFO      data_loader    B0005_full             → 168 cycles | cap 1.2875–1.8565 Ah | amb 24°C
+2026-06-23 09:51:47  INFO      data_loader    B0006_full             → 168 cycles | cap 1.1538–2.0353 Ah | amb 24°C
+2026-06-23 09:51:47  INFO      data_loader    B0025_full             →  28 cycles | cap 1.7678–1.8490 Ah | amb 24°C
+2026-06-23 09:51:47  INFO      data_loader    B0026_full             →  28 cycles | cap 1.3863–1.8165 Ah | amb 24°C
+2026-06-23 09:51:47  INFO      data_loader    B0029_full             →  40 cycles | cap 1.6121–1.8447 Ah | amb 43°C
+2026-06-23 09:51:47  INFO      data_loader    B0030_full             →  40 cycles | cap 1.5628–1.7816 Ah | amb 43°C
+2026-06-23 09:51:48  INFO      data_loader    B0033_full             → 197 cycles | cap 0.0684–1.8851 Ah | amb 24°C
+2026-06-23 09:51:48  INFO      data_loader    B0034_full             → 197 cycles | cap 0.7459–1.8203 Ah | amb 24°C
+2026-06-23 09:51:48  INFO      data_loader    B0038_full             →  47 cycles | cap 0.8981–1.7864 Ah | amb 39°C
+2026-06-23 09:51:48  INFO      data_loader    B0041_full             →  67 cycles | cap 0.0441–1.2156 Ah | amb 4°C
+2026-06-23 09:51:48  INFO      data_loader    B0042_full             → 111 cycles | cap 0.0622–1.7315 Ah | amb 10°C
+2026-06-23 09:51:48  INFO      data_loader    B0043_full             → 111 cycles | cap 0.0565–1.7138 Ah | amb 10°C
+2026-06-23 09:51:48  INFO      data_loader    B0045_full             →  70 cycles | cap 0.6069–1.0820 Ah | amb 4°C
+2026-06-23 09:51:49  INFO      data_loader    B0046_full             →  69 cycles | cap 1.1237–1.7282 Ah | amb 4°C
+2026-06-23 09:51:49  INFO      data_loader    B0047_full             →  69 cycles | cap 1.1060–1.6743 Ah | amb 4°C
+2026-06-23 09:51:49  INFO      data_loader    B0049_full             →  24 cycles | cap 0.6914–2.3786 Ah | amb 4°C
+2026-06-23 09:51:49  INFO      data_loader    B0051_full             →  24 cycles | cap 0.6435–2.3309 Ah | amb 4°C
+2026-06-23 09:51:49  INFO      data_loader    B0053_full             →  55 cycles | cap 0.9801–1.1541 Ah | amb 4°C
+2026-06-23 09:51:49  INFO      data_loader    B0054_full             → 102 cycles | cap 0.7399–1.1665 Ah | amb 4°C
+2026-06-23 09:51:49  INFO      data_loader    B0055_full             → 102 cycles | cap 0.7990–1.3199 Ah | amb 4°C
+2026-06-23 09:51:49  INFO      data_loader    → 1717 total cycles | 20 batteries: ['B0005_full', 'B0006_full', 'B0025_full', 'B0026_full', 'B0029_full', 'B0030_full', 'B0033_full', 'B0034_full', 'B0038_full', 'B0041_full', 'B0042_full', 'B0043_full', 'B0045_full', 'B0046_full', 'B0047_full', 'B0049_full', 'B0051_full', 'B0053_full', 'B0054_full', 'B0055_full']
+2026-06-23 09:51:49  INFO      data_loader  Loading 5 files from 'NASA/Val' …
+2026-06-23 09:51:49  INFO      data_loader    B0018_full             → 132 cycles | cap 1.3411–1.8550 Ah | amb 24°C
+2026-06-23 09:51:49  INFO      data_loader    B0027_full             →  28 cycles | cap 1.7701–1.8233 Ah | amb 24°C
+2026-06-23 09:51:50  INFO      data_loader    B0031_full             →  40 cycles | cap 1.6667–1.8329 Ah | amb 43°C
+2026-06-23 09:51:50  INFO      data_loader    B0039_full             →  47 cycles | cap 0.1190–1.7716 Ah | amb 39°C
+2026-06-23 09:51:50  INFO      data_loader    B0050_full             →  20 cycles | cap 0.0326–2.6401 Ah | amb 4°C
+2026-06-23 09:51:50  INFO      data_loader    → 267 total cycles | 5 batteries: ['B0018_full', 'B0027_full', 'B0031_full', 'B0039_full', 'B0050_full']
+2026-06-23 09:51:50  INFO      data_loader  Loading 9 files from 'NASA/Test' …
+2026-06-23 09:51:50  INFO      data_loader    B0007_full             → 168 cycles | cap 1.4005–1.8911 Ah | amb 24°C
+2026-06-23 09:51:50  INFO      data_loader    B0028_full             →  28 cycles | cap 1.7172–1.8048 Ah | amb 24°C
+2026-06-23 09:51:50  INFO      data_loader    B0032_full             →  40 cycles | cap 1.6358–1.8940 Ah | amb 43°C
+2026-06-23 09:51:51  INFO      data_loader    B0036_full             → 197 cycles | cap 1.0020–2.4441 Ah | amb 24°C
+2026-06-23 09:51:51  INFO      data_loader    B0040_full             →  47 cycles | cap 0.4258–1.7341 Ah | amb 39°C
+2026-06-23 09:51:51  INFO      data_loader    B0044_full             → 111 cycles | cap 0.0551–1.6865 Ah | amb 10°C
+2026-06-23 09:51:51  INFO      data_loader    B0048_full             →  69 cycles | cap 1.1577–1.6580 Ah | amb 4°C
+2026-06-23 09:51:51  INFO      data_loader    B0052_full             →   4 cycles | cap 0.8607–1.4183 Ah | amb 4°C
+2026-06-23 09:51:51  INFO      data_loader    B0056_full             → 102 cycles | cap 0.7853–1.3444 Ah | amb 4°C
+2026-06-23 09:51:51  INFO      data_loader    → 766 total cycles | 9 batteries: ['B0007_full', 'B0028_full', 'B0032_full', 'B0036_full', 'B0040_full', 'B0044_full', 'B0048_full', 'B0052_full', 'B0056_full']
+2026-06-23 09:51:51  INFO      data_loader  ------------------------------------------------------------
+2026-06-23 09:51:51  INFO      data_loader  Train: 1717 cycles | 20 batteries
+2026-06-23 09:51:51  INFO      data_loader  Val  :  267 cycles | 5 batteries
+2026-06-23 09:51:51  INFO      data_loader  Test :  766 cycles | 9 batteries
+2026-06-23 09:51:51  INFO      data_loader  ============================================================
+2026-06-23 09:51:51  INFO      __main__  Samples  — Train: 1717 | Val: 267 | Test: 766
+2026-06-23 09:51:51  INFO      __main__  Features (15): ['cycle_index', 'V_measured', 'T_measured', 'ambient_temp', 'Re', 'Rct', 'Re_growth', 'Rct_growth', 'V_drop', 'cap_fade_rate', 'eol_proximity', 'Re_x_Rct', 'Rct_Re_ratio', 'V_Re_interaction', 'cycle_sq']
+2026-06-23 09:51:51  INFO      __main__  Fitting GBM pipeline …
+2026-06-23 09:51:52  INFO      __main__  Training complete in 0.39 s
+2026-06-23 09:51:52  INFO      __main__  ────────────────────────────────────────────────────────────────
+2026-06-23 09:51:52  INFO      __main__    Train  R²=0.9988  MAE=0.0108 Ah  RMSE=0.0158 Ah
+2026-06-23 09:51:52  INFO      __main__    Val    R²=0.5338  MAE=0.1243 Ah  RMSE=0.2622 Ah
+2026-06-23 09:51:52  INFO      __main__    Test   R²=0.6705  MAE=0.1791 Ah  RMSE=0.2468 Ah  ← cross-battery generalisation
+2026-06-23 09:51:52  INFO      __main__  ────────────────────────────────────────────────────────────────
+2026-06-23 09:51:52  INFO      __main__  Feature importances (top 10):
+2026-06-23 09:51:52  INFO      __main__    ambient_temp                  0.8285  █████████████████████████████████████████
+2026-06-23 09:51:52  INFO      __main__    T_measured                    0.0621  ███
+2026-06-23 09:51:52  INFO      __main__    V_measured                    0.0393  █
+2026-06-23 09:51:52  INFO      __main__    V_drop                        0.0107  
+2026-06-23 09:51:52  INFO      __main__    cycle_index                   0.0089  
+2026-06-23 09:51:52  INFO      __main__    Rct                           0.0088  
+2026-06-23 09:51:52  INFO      __main__    eol_proximity                 0.0086  
+2026-06-23 09:51:52  INFO      __main__    V_Re_interaction              0.0068  
+2026-06-23 09:51:52  INFO      __main__    Rct_Re_ratio                  0.0057  
+2026-06-23 09:51:52  INFO      __main__    Re                            0.0054  
+2026-06-23 09:51:52  INFO      __main__  Model   saved → model/xgb_battery_model.pkl
+2026-06-23 09:51:52  INFO      __main__  Metrics saved → model/model_meta.json
+2026-06-23 09:52:48  INFO      __main__  Generating physics-informed RUL training data (300 simulated cells) …
+2026-06-23 09:52:48  INFO      __main__  RUL dataset: 236717 rows | RUL range 0–1478 cycles
+2026-06-23 09:52:48  INFO      __main__  Fitting RUL model …
+2026-06-23 09:52:49  INFO      __main__  RUL model — Test R²=0.9918  MAE=20.3 cycles  RMSE=26.4 cycles
+2026-06-23 09:52:49  INFO      __main__  RUL feature importances: {'capacity_ah': 0.49, 'soh_pct': 0.272, 'cycle_rate': 0.107, 'avg_temp_C': 0.038, 'deep_rate': 0.034, 'avg_dod': 0.031, 'cycle_index': 0.028}
+2026-06-23 09:52:49  INFO      __main__  RUL model saved → model/xgb_rul_model.pkl  (0.65 s)
+2026-06-23 09:53:23  INFO      train_model  XGBoost found — using XGBRegressor
+2026-06-23 09:53:23  INFO      data_loader  ============================================================
+2026-06-23 09:53:23  INFO      data_loader  Loading NASA Battery dataset (3-way split)
+2026-06-23 09:53:23  INFO      data_loader  ============================================================
+2026-06-23 09:53:23  INFO      data_loader  Loading 20 files from 'NASA/Train' …
+2026-06-23 09:53:24  INFO      data_loader    B0005_full             → 168 cycles | cap 1.2875–1.8565 Ah | amb 24°C
+2026-06-23 09:53:24  INFO      data_loader    B0006_full             → 168 cycles | cap 1.1538–2.0353 Ah | amb 24°C
+2026-06-23 09:53:24  INFO      data_loader    B0025_full             →  28 cycles | cap 1.7678–1.8490 Ah | amb 24°C
+2026-06-23 09:53:24  INFO      data_loader    B0026_full             →  28 cycles | cap 1.3863–1.8165 Ah | amb 24°C
+2026-06-23 09:53:25  INFO      data_loader    B0029_full             →  40 cycles | cap 1.6121–1.8447 Ah | amb 43°C
+2026-06-23 09:53:25  INFO      data_loader    B0030_full             →  40 cycles | cap 1.5628–1.7816 Ah | amb 43°C
+2026-06-23 09:53:25  INFO      data_loader    B0033_full             → 197 cycles | cap 0.0684–1.8851 Ah | amb 24°C
+2026-06-23 09:53:25  INFO      data_loader    B0034_full             → 197 cycles | cap 0.7459–1.8203 Ah | amb 24°C
+2026-06-23 09:53:25  INFO      data_loader    B0038_full             →  47 cycles | cap 0.8981–1.7864 Ah | amb 39°C
+2026-06-23 09:53:25  INFO      data_loader    B0041_full             →  67 cycles | cap 0.0441–1.2156 Ah | amb 4°C
+2026-06-23 09:53:26  INFO      data_loader    B0042_full             → 111 cycles | cap 0.0622–1.7315 Ah | amb 10°C
+2026-06-23 09:53:26  INFO      data_loader    B0043_full             → 111 cycles | cap 0.0565–1.7138 Ah | amb 10°C
+2026-06-23 09:53:26  INFO      data_loader    B0045_full             →  70 cycles | cap 0.6069–1.0820 Ah | amb 4°C
+2026-06-23 09:53:26  INFO      data_loader    B0046_full             →  69 cycles | cap 1.1237–1.7282 Ah | amb 4°C
+2026-06-23 09:53:26  INFO      data_loader    B0047_full             →  69 cycles | cap 1.1060–1.6743 Ah | amb 4°C
+2026-06-23 09:53:26  INFO      data_loader    B0049_full             →  24 cycles | cap 0.6914–2.3786 Ah | amb 4°C
+2026-06-23 09:53:26  INFO      data_loader    B0051_full             →  24 cycles | cap 0.6435–2.3309 Ah | amb 4°C
+2026-06-23 09:53:26  INFO      data_loader    B0053_full             →  55 cycles | cap 0.9801–1.1541 Ah | amb 4°C
+2026-06-23 09:53:26  INFO      data_loader    B0054_full             → 102 cycles | cap 0.7399–1.1665 Ah | amb 4°C
+2026-06-23 09:53:27  INFO      data_loader    B0055_full             → 102 cycles | cap 0.7990–1.3199 Ah | amb 4°C
+2026-06-23 09:53:27  INFO      data_loader    → 1717 total cycles | 20 batteries: ['B0005_full', 'B0006_full', 'B0025_full', 'B0026_full', 'B0029_full', 'B0030_full', 'B0033_full', 'B0034_full', 'B0038_full', 'B0041_full', 'B0042_full', 'B0043_full', 'B0045_full', 'B0046_full', 'B0047_full', 'B0049_full', 'B0051_full', 'B0053_full', 'B0054_full', 'B0055_full']
+2026-06-23 09:53:27  INFO      data_loader  Loading 5 files from 'NASA/Val' …
+2026-06-23 09:53:27  INFO      data_loader    B0018_full             → 132 cycles | cap 1.3411–1.8550 Ah | amb 24°C
+2026-06-23 09:53:27  INFO      data_loader    B0027_full             →  28 cycles | cap 1.7701–1.8233 Ah | amb 24°C
+2026-06-23 09:53:27  INFO      data_loader    B0031_full             →  40 cycles | cap 1.6667–1.8329 Ah | amb 43°C
+2026-06-23 09:53:27  INFO      data_loader    B0039_full             →  47 cycles | cap 0.1190–1.7716 Ah | amb 39°C
+2026-06-23 09:53:27  INFO      data_loader    B0050_full             →  20 cycles | cap 0.0326–2.6401 Ah | amb 4°C
+2026-06-23 09:53:27  INFO      data_loader    → 267 total cycles | 5 batteries: ['B0018_full', 'B0027_full', 'B0031_full', 'B0039_full', 'B0050_full']
+2026-06-23 09:53:27  INFO      data_loader  Loading 9 files from 'NASA/Test' …
+2026-06-23 09:53:28  INFO      data_loader    B0007_full             → 168 cycles | cap 1.4005–1.8911 Ah | amb 24°C
+2026-06-23 09:53:28  INFO      data_loader    B0028_full             →  28 cycles | cap 1.7172–1.8048 Ah | amb 24°C
+2026-06-23 09:53:28  INFO      data_loader    B0032_full             →  40 cycles | cap 1.6358–1.8940 Ah | amb 43°C
+2026-06-23 09:53:28  INFO      data_loader    B0036_full             → 197 cycles | cap 1.0020–2.4441 Ah | amb 24°C
+2026-06-23 09:53:28  INFO      data_loader    B0040_full             →  47 cycles | cap 0.4258–1.7341 Ah | amb 39°C
+2026-06-23 09:53:28  INFO      data_loader    B0044_full             → 111 cycles | cap 0.0551–1.6865 Ah | amb 10°C
+2026-06-23 09:53:28  INFO      data_loader    B0048_full             →  69 cycles | cap 1.1577–1.6580 Ah | amb 4°C
+2026-06-23 09:53:28  INFO      data_loader    B0052_full             →   4 cycles | cap 0.8607–1.4183 Ah | amb 4°C
+2026-06-23 09:53:29  INFO      data_loader    B0056_full             → 102 cycles | cap 0.7853–1.3444 Ah | amb 4°C
+2026-06-23 09:53:29  INFO      data_loader    → 766 total cycles | 9 batteries: ['B0007_full', 'B0028_full', 'B0032_full', 'B0036_full', 'B0040_full', 'B0044_full', 'B0048_full', 'B0052_full', 'B0056_full']
+2026-06-23 09:53:29  INFO      data_loader  ------------------------------------------------------------
+2026-06-23 09:53:29  INFO      data_loader  Train: 1717 cycles | 20 batteries
+2026-06-23 09:53:29  INFO      data_loader  Val  :  267 cycles | 5 batteries
+2026-06-23 09:53:29  INFO      data_loader  Test :  766 cycles | 9 batteries
+2026-06-23 09:53:29  INFO      data_loader  ============================================================
+2026-06-23 09:53:29  INFO      data_loader    B0041_full             →  67 cycles | cap 0.0441–1.2156 Ah | amb 4°C
+2026-06-23 09:53:29  INFO      data_loader    B0041_full             →  67 cycles | cap 0.0441–1.2156 Ah | amb 4°C
+2026-06-23 09:53:29  INFO      data_loader    B0041_full             →  67 cycles | cap 0.0441–1.2156 Ah | amb 4°C
+2026-06-23 09:53:29  INFO      data_loader    B0041_full             →  67 cycles | cap 0.0441–1.2156 Ah | amb 4°C
+2026-06-23 09:53:29  INFO      data_loader  ============================================================
+2026-06-23 09:53:29  INFO      data_loader  Loading NASA Battery dataset (3-way split)
+2026-06-23 09:53:29  INFO      data_loader  ============================================================
+2026-06-23 09:53:29  INFO      data_loader  Loading 20 files from 'NASA/Train' …
+2026-06-23 09:53:29  INFO      data_loader    B0005_full             → 168 cycles | cap 1.2875–1.8565 Ah | amb 24°C
+2026-06-23 09:53:30  INFO      data_loader    B0006_full             → 168 cycles | cap 1.1538–2.0353 Ah | amb 24°C
+2026-06-23 09:53:30  INFO      data_loader    B0025_full             →  28 cycles | cap 1.7678–1.8490 Ah | amb 24°C
+2026-06-23 09:53:30  INFO      data_loader    B0026_full             →  28 cycles | cap 1.3863–1.8165 Ah | amb 24°C
+2026-06-23 09:53:30  INFO      data_loader    B0029_full             →  40 cycles | cap 1.6121–1.8447 Ah | amb 43°C
+2026-06-23 09:53:30  INFO      data_loader    B0030_full             →  40 cycles | cap 1.5628–1.7816 Ah | amb 43°C
+2026-06-23 09:53:30  INFO      data_loader    B0033_full             → 197 cycles | cap 0.0684–1.8851 Ah | amb 24°C
+2026-06-23 09:53:31  INFO      data_loader    B0034_full             → 197 cycles | cap 0.7459–1.8203 Ah | amb 24°C
+2026-06-23 09:53:31  INFO      data_loader    B0038_full             →  47 cycles | cap 0.8981–1.7864 Ah | amb 39°C
+2026-06-23 09:53:31  INFO      data_loader    B0041_full             →  67 cycles | cap 0.0441–1.2156 Ah | amb 4°C
+2026-06-23 09:53:31  INFO      data_loader    B0042_full             → 111 cycles | cap 0.0622–1.7315 Ah | amb 10°C
+2026-06-23 09:53:31  INFO      data_loader    B0043_full             → 111 cycles | cap 0.0565–1.7138 Ah | amb 10°C
+2026-06-23 09:53:31  INFO      data_loader    B0045_full             →  70 cycles | cap 0.6069–1.0820 Ah | amb 4°C
+2026-06-23 09:53:31  INFO      data_loader    B0046_full             →  69 cycles | cap 1.1237–1.7282 Ah | amb 4°C
+2026-06-23 09:53:31  INFO      data_loader    B0047_full             →  69 cycles | cap 1.1060–1.6743 Ah | amb 4°C
+2026-06-23 09:53:31  INFO      data_loader    B0049_full             →  24 cycles | cap 0.6914–2.3786 Ah | amb 4°C
+2026-06-23 09:53:32  INFO      data_loader    B0051_full             →  24 cycles | cap 0.6435–2.3309 Ah | amb 4°C
+2026-06-23 09:53:32  INFO      data_loader    B0053_full             →  55 cycles | cap 0.9801–1.1541 Ah | amb 4°C
+2026-06-23 09:53:32  INFO      data_loader    B0054_full             → 102 cycles | cap 0.7399–1.1665 Ah | amb 4°C
+2026-06-23 09:53:32  INFO      data_loader    B0055_full             → 102 cycles | cap 0.7990–1.3199 Ah | amb 4°C
+2026-06-23 09:53:32  INFO      data_loader    → 1717 total cycles | 20 batteries: ['B0005_full', 'B0006_full', 'B0025_full', 'B0026_full', 'B0029_full', 'B0030_full', 'B0033_full', 'B0034_full', 'B0038_full', 'B0041_full', 'B0042_full', 'B0043_full', 'B0045_full', 'B0046_full', 'B0047_full', 'B0049_full', 'B0051_full', 'B0053_full', 'B0054_full', 'B0055_full']
+2026-06-23 09:53:32  INFO      data_loader  Loading 5 files from 'NASA/Val' …
+2026-06-23 09:53:32  INFO      data_loader    B0018_full             → 132 cycles | cap 1.3411–1.8550 Ah | amb 24°C
+2026-06-23 09:53:32  INFO      data_loader    B0027_full             →  28 cycles | cap 1.7701–1.8233 Ah | amb 24°C
+2026-06-23 09:53:32  INFO      data_loader    B0031_full             →  40 cycles | cap 1.6667–1.8329 Ah | amb 43°C
+2026-06-23 09:53:32  INFO      data_loader    B0039_full             →  47 cycles | cap 0.1190–1.7716 Ah | amb 39°C
+2026-06-23 09:53:33  INFO      data_loader    B0050_full             →  20 cycles | cap 0.0326–2.6401 Ah | amb 4°C
+2026-06-23 09:53:33  INFO      data_loader    → 267 total cycles | 5 batteries: ['B0018_full', 'B0027_full', 'B0031_full', 'B0039_full', 'B0050_full']
+2026-06-23 09:53:33  INFO      data_loader  Loading 9 files from 'NASA/Test' …
+2026-06-23 09:53:33  INFO      data_loader    B0007_full             → 168 cycles | cap 1.4005–1.8911 Ah | amb 24°C
+2026-06-23 09:53:33  INFO      data_loader    B0028_full             →  28 cycles | cap 1.7172–1.8048 Ah | amb 24°C
+2026-06-23 09:53:33  INFO      data_loader    B0032_full             →  40 cycles | cap 1.6358–1.8940 Ah | amb 43°C
+2026-06-23 09:53:33  INFO      data_loader    B0036_full             → 197 cycles | cap 1.0020–2.4441 Ah | amb 24°C
+2026-06-23 09:53:33  INFO      data_loader    B0040_full             →  47 cycles | cap 0.4258–1.7341 Ah | amb 39°C
+2026-06-23 09:53:34  INFO      data_loader    B0044_full             → 111 cycles | cap 0.0551–1.6865 Ah | amb 10°C
+2026-06-23 09:53:34  INFO      data_loader    B0048_full             →  69 cycles | cap 1.1577–1.6580 Ah | amb 4°C
+2026-06-23 09:53:34  INFO      data_loader    B0052_full             →   4 cycles | cap 0.8607–1.4183 Ah | amb 4°C
+2026-06-23 09:53:34  INFO      data_loader    B0056_full             → 102 cycles | cap 0.7853–1.3444 Ah | amb 4°C
+2026-06-23 09:53:34  INFO      data_loader    → 766 total cycles | 9 batteries: ['B0007_full', 'B0028_full', 'B0032_full', 'B0036_full', 'B0040_full', 'B0044_full', 'B0048_full', 'B0052_full', 'B0056_full']
+2026-06-23 09:53:34  INFO      data_loader  ------------------------------------------------------------
+2026-06-23 09:53:34  INFO      data_loader  Train: 1717 cycles | 20 batteries
+2026-06-23 09:53:34  INFO      data_loader  Val  :  267 cycles | 5 batteries
+2026-06-23 09:53:34  INFO      data_loader  Test :  766 cycles | 9 batteries
+2026-06-23 09:53:34  INFO      data_loader  ============================================================
+2026-06-23 09:53:34  INFO      data_loader  ============================================================
+2026-06-23 09:53:34  INFO      data_loader  Loading NASA Battery dataset (3-way split)
+2026-06-23 09:53:34  INFO      data_loader  ============================================================
+2026-06-23 09:53:34  INFO      data_loader  Loading 20 files from 'NASA/Train' …
+2026-06-23 09:53:34  INFO      data_loader    B0005_full             → 168 cycles | cap 1.2875–1.8565 Ah | amb 24°C
+2026-06-23 09:53:35  INFO      data_loader    B0006_full             → 168 cycles | cap 1.1538–2.0353 Ah | amb 24°C
+2026-06-23 09:53:35  INFO      data_loader    B0025_full             →  28 cycles | cap 1.7678–1.8490 Ah | amb 24°C
+2026-06-23 09:53:35  INFO      data_loader    B0026_full             →  28 cycles | cap 1.3863–1.8165 Ah | amb 24°C
+2026-06-23 09:53:35  INFO      data_loader    B0029_full             →  40 cycles | cap 1.6121–1.8447 Ah | amb 43°C
+2026-06-23 09:53:35  INFO      data_loader    B0030_full             →  40 cycles | cap 1.5628–1.7816 Ah | amb 43°C
+2026-06-23 09:53:35  INFO      data_loader    B0033_full             → 197 cycles | cap 0.0684–1.8851 Ah | amb 24°C
+2026-06-23 09:53:36  INFO      data_loader    B0034_full             → 197 cycles | cap 0.7459–1.8203 Ah | amb 24°C
+2026-06-23 09:53:36  INFO      data_loader    B0038_full             →  47 cycles | cap 0.8981–1.7864 Ah | amb 39°C
+2026-06-23 09:53:36  INFO      data_loader    B0041_full             →  67 cycles | cap 0.0441–1.2156 Ah | amb 4°C
+2026-06-23 09:53:36  INFO      data_loader    B0042_full             → 111 cycles | cap 0.0622–1.7315 Ah | amb 10°C
+2026-06-23 09:53:36  INFO      data_loader    B0043_full             → 111 cycles | cap 0.0565–1.7138 Ah | amb 10°C
+2026-06-23 09:53:36  INFO      data_loader    B0045_full             →  70 cycles | cap 0.6069–1.0820 Ah | amb 4°C
+2026-06-23 09:53:36  INFO      data_loader    B0046_full             →  69 cycles | cap 1.1237–1.7282 Ah | amb 4°C
+2026-06-23 09:53:36  INFO      data_loader    B0047_full             →  69 cycles | cap 1.1060–1.6743 Ah | amb 4°C
+2026-06-23 09:53:37  INFO      data_loader    B0049_full             →  24 cycles | cap 0.6914–2.3786 Ah | amb 4°C
+2026-06-23 09:53:37  INFO      data_loader    B0051_full             →  24 cycles | cap 0.6435–2.3309 Ah | amb 4°C
+2026-06-23 09:53:37  INFO      data_loader    B0053_full             →  55 cycles | cap 0.9801–1.1541 Ah | amb 4°C
+2026-06-23 09:53:37  INFO      data_loader    B0054_full             → 102 cycles | cap 0.7399–1.1665 Ah | amb 4°C
+2026-06-23 09:53:37  INFO      data_loader    B0055_full             → 102 cycles | cap 0.7990–1.3199 Ah | amb 4°C
+2026-06-23 09:53:37  INFO      data_loader    → 1717 total cycles | 20 batteries: ['B0005_full', 'B0006_full', 'B0025_full', 'B0026_full', 'B0029_full', 'B0030_full', 'B0033_full', 'B0034_full', 'B0038_full', 'B0041_full', 'B0042_full', 'B0043_full', 'B0045_full', 'B0046_full', 'B0047_full', 'B0049_full', 'B0051_full', 'B0053_full', 'B0054_full', 'B0055_full']
+2026-06-23 09:53:37  INFO      data_loader  Loading 5 files from 'NASA/Val' …
+2026-06-23 09:53:37  INFO      data_loader    B0018_full             → 132 cycles | cap 1.3411–1.8550 Ah | amb 24°C
+2026-06-23 09:53:37  INFO      data_loader    B0027_full             →  28 cycles | cap 1.7701–1.8233 Ah | amb 24°C
+2026-06-23 09:53:37  INFO      data_loader    B0031_full             →  40 cycles | cap 1.6667–1.8329 Ah | amb 43°C
+2026-06-23 09:53:37  INFO      data_loader    B0039_full             →  47 cycles | cap 0.1190–1.7716 Ah | amb 39°C
+2026-06-23 09:53:38  INFO      data_loader    B0050_full             →  20 cycles | cap 0.0326–2.6401 Ah | amb 4°C
+2026-06-23 09:53:38  INFO      data_loader    → 267 total cycles | 5 batteries: ['B0018_full', 'B0027_full', 'B0031_full', 'B0039_full', 'B0050_full']
+2026-06-23 09:53:38  INFO      data_loader  Loading 9 files from 'NASA/Test' …
+2026-06-23 09:53:38  INFO      data_loader    B0007_full             → 168 cycles | cap 1.4005–1.8911 Ah | amb 24°C
+2026-06-23 09:53:38  INFO      data_loader    B0028_full             →  28 cycles | cap 1.7172–1.8048 Ah | amb 24°C
+2026-06-23 09:53:38  INFO      data_loader    B0032_full             →  40 cycles | cap 1.6358–1.8940 Ah | amb 43°C
+2026-06-23 09:53:38  INFO      data_loader    B0036_full             → 197 cycles | cap 1.0020–2.4441 Ah | amb 24°C
+2026-06-23 09:53:38  INFO      data_loader    B0040_full             →  47 cycles | cap 0.4258–1.7341 Ah | amb 39°C
+2026-06-23 09:53:39  INFO      data_loader    B0044_full             → 111 cycles | cap 0.0551–1.6865 Ah | amb 10°C
+2026-06-23 09:53:39  INFO      data_loader    B0048_full             →  69 cycles | cap 1.1577–1.6580 Ah | amb 4°C
+2026-06-23 09:53:39  INFO      data_loader    B0052_full             →   4 cycles | cap 0.8607–1.4183 Ah | amb 4°C
+2026-06-23 09:53:39  INFO      data_loader    B0056_full             → 102 cycles | cap 0.7853–1.3444 Ah | amb 4°C
+2026-06-23 09:53:39  INFO      data_loader    → 766 total cycles | 9 batteries: ['B0007_full', 'B0028_full', 'B0032_full', 'B0036_full', 'B0040_full', 'B0044_full', 'B0048_full', 'B0052_full', 'B0056_full']
+2026-06-23 09:53:39  INFO      data_loader  ------------------------------------------------------------
+2026-06-23 09:53:39  INFO      data_loader  Train: 1717 cycles | 20 batteries
+2026-06-23 09:53:39  INFO      data_loader  Val  :  267 cycles | 5 batteries
+2026-06-23 09:53:39  INFO      data_loader  Test :  766 cycles | 9 batteries
+2026-06-23 09:53:39  INFO      data_loader  ============================================================
+2026-06-23 09:53:39  INFO      train_model  Force-synthetic mode — ignoring real CSVs
+2026-06-23 09:53:39  INFO      train_model  Samples  — Train: 5000 | Val: 1000 | Test: 1500
+2026-06-23 09:53:39  INFO      train_model  Features (15): ['cycle_index', 'V_measured', 'T_measured', 'ambient_temp', 'Re', 'Rct', 'Re_growth', 'Rct_growth', 'V_drop', 'cap_fade_rate', 'eol_proximity', 'Re_x_Rct', 'Rct_Re_ratio', 'V_Re_interaction', 'cycle_sq']
+2026-06-23 09:53:39  INFO      train_model  Fitting GBM pipeline …
+2026-06-23 09:53:39  INFO      train_model  Training complete in 0.26 s
+2026-06-23 09:53:39  INFO      train_model  ────────────────────────────────────────────────────────────────
+2026-06-23 09:53:39  INFO      train_model    Train  R²=0.9997  MAE=0.0023 Ah  RMSE=0.0029 Ah
+2026-06-23 09:53:39  INFO      train_model    Val    R²=0.9995  MAE=0.0031 Ah  RMSE=0.0045 Ah
+2026-06-23 09:53:39  INFO      train_model    Test   R²=0.9995  MAE=0.0028 Ah  RMSE=0.0041 Ah  ← cross-battery generalisation
+2026-06-23 09:53:39  INFO      train_model  ────────────────────────────────────────────────────────────────
+2026-06-23 09:53:39  INFO      train_model  Feature importances (top 10):
+2026-06-23 09:53:39  INFO      train_model    ambient_temp                  0.9413  ███████████████████████████████████████████████
+2026-06-23 09:53:39  INFO      train_model    T_measured                    0.0208  █
+2026-06-23 09:53:39  INFO      train_model    eol_proximity                 0.0203  █
+2026-06-23 09:53:39  INFO      train_model    cycle_index                   0.0085  
+2026-06-23 09:53:39  INFO      train_model    Re                            0.0057  
+2026-06-23 09:53:39  INFO      train_model    Re_growth                     0.0020  
+2026-06-23 09:53:39  INFO      train_model    Rct                           0.0009  
+2026-06-23 09:53:39  INFO      train_model    cycle_sq                      0.0003  
+2026-06-23 09:53:39  INFO      train_model    Re_x_Rct                      0.0001  
+2026-06-23 09:53:39  INFO      train_model    Rct_growth                    0.0000  
+2026-06-23 09:53:39  INFO      train_model  Model   saved → model/xgb_battery_model.pkl
+2026-06-23 09:53:39  INFO      train_model  Metrics saved → model/model_meta.json
+2026-06-23 09:53:52  INFO      train_model  XGBoost found — using XGBRegressor
+2026-06-23 09:53:52  INFO      __main__  Starting NASA Battery BMS (full dataset — Train/Val/Test) …
+2026-06-23 09:53:52  INFO      train_model  Loaded model from model/xgb_battery_model.pkl  (Test R²=0.9995  Val R²=0.9995  RMSE=0.0041 Ah)
+2026-06-23 09:53:52  INFO      train_rul_model  RUL model loaded from model/xgb_rul_model.pkl
+2026-06-23 09:53:52  INFO      __main__  API ready → http://0.0.0.0:5002
+2026-06-23 10:02:53  INFO      train_model  XGBoost found — using XGBRegressor
+2026-06-23 10:02:53  INFO      __main__  Starting NASA Battery BMS (full dataset — Train/Val/Test) …
+2026-06-23 10:02:53  INFO      train_model  Loaded model from model/xgb_battery_model.pkl  (Test R²=0.9995  Val R²=0.9995  RMSE=0.0041 Ah)
+2026-06-23 10:02:53  INFO      train_rul_model  RUL model loaded from model/xgb_rul_model.pkl
+2026-06-23 10:02:53  INFO      __main__  API ready → http://0.0.0.0:5002
+2026-06-23 10:02:59  INFO      __main__  predict: cycle=1 V=3.700 Re=0.1000 Rct=0.1800 T=25.0 amb=25 → cap=1.7595 Ah SOH=88.0% RUL=338
+2026-06-23 10:03:30  INFO      __main__  predict: cycle=451 V=3.700 Re=0.1650 Rct=0.2600 T=10.0 amb=10 → cap=0.7551 Ah SOH=37.8% RUL=115
+2026-06-23 10:06:07  INFO      __main__  XGBoost found — using XGBRegressor
+2026-06-23 10:06:07  INFO      data_loader  ============================================================
+2026-06-23 10:06:07  INFO      data_loader  Loading NASA Battery dataset (3-way split)
+2026-06-23 10:06:07  INFO      data_loader  ============================================================
+2026-06-23 10:06:07  INFO      data_loader  Loading 20 files from 'NASA/Train' …
+2026-06-23 10:06:08  INFO      data_loader    B0005_full             → 168 cycles | cap 1.2875–1.8565 Ah | amb 24°C
+2026-06-23 10:06:08  INFO      data_loader    B0006_full             → 168 cycles | cap 1.1538–2.0353 Ah | amb 24°C
+2026-06-23 10:06:08  INFO      data_loader    B0025_full             →  28 cycles | cap 1.7678–1.8490 Ah | amb 24°C
+2026-06-23 10:06:08  INFO      data_loader    B0026_full             →  28 cycles | cap 1.3863–1.8165 Ah | amb 24°C
+2026-06-23 10:06:08  INFO      data_loader    B0029_full             →  40 cycles | cap 1.6121–1.8447 Ah | amb 43°C
+2026-06-23 10:06:08  INFO      data_loader    B0030_full             →  40 cycles | cap 1.5628–1.7816 Ah | amb 43°C
+2026-06-23 10:06:09  INFO      data_loader    B0033_full             → 197 cycles | cap 0.0684–1.8851 Ah | amb 24°C
+2026-06-23 10:06:09  INFO      data_loader    B0034_full             → 197 cycles | cap 0.7459–1.8203 Ah | amb 24°C
+2026-06-23 10:06:09  INFO      data_loader    B0038_full             →  47 cycles | cap 0.8981–1.7864 Ah | amb 39°C
+2026-06-23 10:06:09  INFO      data_loader    B0041_full             →  67 cycles | cap 0.0441–1.2156 Ah | amb 4°C
+2026-06-23 10:06:09  INFO      data_loader    B0042_full             → 111 cycles | cap 0.0622–1.7315 Ah | amb 10°C
+2026-06-23 10:06:09  INFO      data_loader    B0043_full             → 111 cycles | cap 0.0565–1.7138 Ah | amb 10°C
+2026-06-23 10:06:09  INFO      data_loader    B0045_full             →  70 cycles | cap 0.6069–1.0820 Ah | amb 4°C
+2026-06-23 10:06:10  INFO      data_loader    B0046_full             →  69 cycles | cap 1.1237–1.7282 Ah | amb 4°C
+2026-06-23 10:06:10  INFO      data_loader    B0047_full             →  69 cycles | cap 1.1060–1.6743 Ah | amb 4°C
+2026-06-23 10:06:10  INFO      data_loader    B0049_full             →  24 cycles | cap 0.6914–2.3786 Ah | amb 4°C
+2026-06-23 10:06:10  INFO      data_loader    B0051_full             →  24 cycles | cap 0.6435–2.3309 Ah | amb 4°C
+2026-06-23 10:06:10  INFO      data_loader    B0053_full             →  55 cycles | cap 0.9801–1.1541 Ah | amb 4°C
+2026-06-23 10:06:10  INFO      data_loader    B0054_full             → 102 cycles | cap 0.7399–1.1665 Ah | amb 4°C
+2026-06-23 10:06:10  INFO      data_loader    B0055_full             → 102 cycles | cap 0.7990–1.3199 Ah | amb 4°C
+2026-06-23 10:06:10  INFO      data_loader    → 1717 total cycles | 20 batteries: ['B0005_full', 'B0006_full', 'B0025_full', 'B0026_full', 'B0029_full', 'B0030_full', 'B0033_full', 'B0034_full', 'B0038_full', 'B0041_full', 'B0042_full', 'B0043_full', 'B0045_full', 'B0046_full', 'B0047_full', 'B0049_full', 'B0051_full', 'B0053_full', 'B0054_full', 'B0055_full']
+2026-06-23 10:06:10  INFO      data_loader  Loading 5 files from 'NASA/Val' …
+2026-06-23 10:06:10  INFO      data_loader    B0018_full             → 132 cycles | cap 1.3411–1.8550 Ah | amb 24°C
+2026-06-23 10:06:10  INFO      data_loader    B0027_full             →  28 cycles | cap 1.7701–1.8233 Ah | amb 24°C
+2026-06-23 10:06:11  INFO      data_loader    B0031_full             →  40 cycles | cap 1.6667–1.8329 Ah | amb 43°C
+2026-06-23 10:06:11  INFO      data_loader    B0039_full             →  47 cycles | cap 0.1190–1.7716 Ah | amb 39°C
+2026-06-23 10:06:11  INFO      data_loader    B0050_full             →  20 cycles | cap 0.0326–2.6401 Ah | amb 4°C
+2026-06-23 10:06:11  INFO      data_loader    → 267 total cycles | 5 batteries: ['B0018_full', 'B0027_full', 'B0031_full', 'B0039_full', 'B0050_full']
+2026-06-23 10:06:11  INFO      data_loader  Loading 9 files from 'NASA/Test' …
+2026-06-23 10:06:11  INFO      data_loader    B0007_full             → 168 cycles | cap 1.4005–1.8911 Ah | amb 24°C
+2026-06-23 10:06:11  INFO      data_loader    B0028_full             →  28 cycles | cap 1.7172–1.8048 Ah | amb 24°C
+2026-06-23 10:06:11  INFO      data_loader    B0032_full             →  40 cycles | cap 1.6358–1.8940 Ah | amb 43°C
+2026-06-23 10:06:12  INFO      data_loader    B0036_full             → 197 cycles | cap 1.0020–2.4441 Ah | amb 24°C
+2026-06-23 10:06:12  INFO      data_loader    B0040_full             →  47 cycles | cap 0.4258–1.7341 Ah | amb 39°C
+2026-06-23 10:06:12  INFO      data_loader    B0044_full             → 111 cycles | cap 0.0551–1.6865 Ah | amb 10°C
+2026-06-23 10:06:12  INFO      data_loader    B0048_full             →  69 cycles | cap 1.1577–1.6580 Ah | amb 4°C
+2026-06-23 10:06:12  INFO      data_loader    B0052_full             →   4 cycles | cap 0.8607–1.4183 Ah | amb 4°C
+2026-06-23 10:06:12  INFO      data_loader    B0056_full             → 102 cycles | cap 0.7853–1.3444 Ah | amb 4°C
+2026-06-23 10:06:12  INFO      data_loader    → 766 total cycles | 9 batteries: ['B0007_full', 'B0028_full', 'B0032_full', 'B0036_full', 'B0040_full', 'B0044_full', 'B0048_full', 'B0052_full', 'B0056_full']
+2026-06-23 10:06:12  INFO      data_loader  ------------------------------------------------------------
+2026-06-23 10:06:12  INFO      data_loader  Train: 1717 cycles | 20 batteries
+2026-06-23 10:06:12  INFO      data_loader  Val  :  267 cycles | 5 batteries
+2026-06-23 10:06:12  INFO      data_loader  Test :  766 cycles | 9 batteries
+2026-06-23 10:06:12  INFO      data_loader  ============================================================
+2026-06-23 10:06:12  INFO      __main__  Samples  — Train: 1717 | Val: 267 | Test: 766
+2026-06-23 10:06:12  INFO      __main__  Features (15): ['cycle_index', 'V_measured', 'T_measured', 'ambient_temp', 'Re', 'Rct', 'Re_growth', 'Rct_growth', 'V_drop', 'cap_fade_rate', 'eol_proximity', 'Re_x_Rct', 'Rct_Re_ratio', 'V_Re_interaction', 'cycle_sq']
+2026-06-23 10:06:12  INFO      __main__  Fitting GBM pipeline …
+2026-06-23 10:06:13  INFO      __main__  Training complete in 0.33 s
+2026-06-23 10:06:13  INFO      __main__  ────────────────────────────────────────────────────────────────
+2026-06-23 10:06:13  INFO      __main__    Train  R²=0.9988  MAE=0.0108 Ah  RMSE=0.0158 Ah
+2026-06-23 10:06:13  INFO      __main__    Val    R²=0.5338  MAE=0.1243 Ah  RMSE=0.2622 Ah
+2026-06-23 10:06:13  INFO      __main__    Test   R²=0.6705  MAE=0.1791 Ah  RMSE=0.2468 Ah  ← cross-battery generalisation
+2026-06-23 10:06:13  INFO      __main__  ────────────────────────────────────────────────────────────────
+2026-06-23 10:06:13  INFO      __main__  Feature importances (top 10):
+2026-06-23 10:06:13  INFO      __main__    ambient_temp                  0.8285  █████████████████████████████████████████
+2026-06-23 10:06:13  INFO      __main__    T_measured                    0.0621  ███
+2026-06-23 10:06:13  INFO      __main__    V_measured                    0.0393  █
+2026-06-23 10:06:13  INFO      __main__    V_drop                        0.0107  
+2026-06-23 10:06:13  INFO      __main__    cycle_index                   0.0089  
+2026-06-23 10:06:13  INFO      __main__    Rct                           0.0088  
+2026-06-23 10:06:13  INFO      __main__    eol_proximity                 0.0086  
+2026-06-23 10:06:13  INFO      __main__    V_Re_interaction              0.0068  
+2026-06-23 10:06:13  INFO      __main__    Rct_Re_ratio                  0.0057  
+2026-06-23 10:06:13  INFO      __main__    Re                            0.0054  
+2026-06-23 10:06:13  INFO      __main__  Model   saved → model/xgb_battery_model.pkl
+2026-06-23 10:06:13  INFO      __main__  Metrics saved → model/model_meta.json
+2026-06-23 10:06:22  INFO      train_model  XGBoost found — using XGBRegressor
+2026-06-23 10:06:22  INFO      __main__  Starting NASA Battery BMS — SOH & RUL Forecasting …
+2026-06-23 10:06:22  INFO      train_model  Loaded model from model/xgb_battery_model.pkl  (Test R²=0.6705  Val R²=0.5338  RMSE=0.2468 Ah)
+2026-06-23 10:06:22  INFO      train_rul_model  RUL model loaded from model/xgb_rul_model.pkl
+2026-06-23 10:06:22  INFO      __main__  API ready → http://0.0.0.0:5002
+2026-06-23 10:06:49  INFO      __main__  predict: cycle=1 V=3.700 Re=0.1000 Rct=0.1800 T=25.0 → cap=0.8122 Ah SOH=40.6% RUL=160
+2026-06-23 10:07:26  INFO      __main__  predict: cycle=1 V=3.350 Re=0.1400 Rct=0.2100 T=10.0 → cap=0.6098 Ah SOH=30.5% RUL=216
+2026-06-23 10:07:40  INFO      __main__  predict: cycle=1 V=3.350 Re=0.2200 Rct=0.4250 T=10.0 → cap=0.6237 Ah SOH=31.2% RUL=149
+2026-06-23 10:07:56  INFO      __main__  predict: cycle=1 V=4.300 Re=0.2200 Rct=0.4250 T=10.0 → cap=0.3393 Ah SOH=17.0% RUL=149
+2026-06-23 10:08:05  INFO      __main__  predict: cycle=1 V=4.300 Re=0.2200 Rct=0.4250 T=-10.0 → cap=0.0000 Ah SOH=0.0% RUL=149
+2026-06-23 10:10:25  INFO      train_model  XGBoost found — using XGBRegressor
+2026-06-23 10:10:25  INFO      __main__  Starting NASA Battery BMS — SOH & RUL Forecasting …
+2026-06-23 10:10:25  INFO      train_model  Loaded model from model/xgb_battery_model.pkl  (Test R²=0.6705  Val R²=0.5338  RMSE=0.2468 Ah)
+2026-06-23 10:10:25  INFO      train_rul_model  RUL model loaded from model/xgb_rul_model.pkl
+2026-06-23 10:10:25  INFO      __main__  API ready → http://0.0.0.0:5002
+2026-06-23 10:10:38  INFO      __main__  Retraining triggered via API …
+2026-06-23 10:10:38  INFO      data_loader  ============================================================
+2026-06-23 10:10:38  INFO      data_loader  Loading NASA Battery dataset (3-way split)
+2026-06-23 10:10:38  INFO      data_loader  ============================================================
+2026-06-23 10:10:38  INFO      data_loader  Loading 20 files from 'NASA/Train' …
+2026-06-23 10:10:39  INFO      data_loader    B0005_full             → 168 cycles | cap 1.2875–1.8565 Ah | amb 24°C
+2026-06-23 10:10:39  INFO      data_loader    B0006_full             → 168 cycles | cap 1.1538–2.0353 Ah | amb 24°C
+2026-06-23 10:10:39  INFO      data_loader    B0025_full             →  28 cycles | cap 1.7678–1.8490 Ah | amb 24°C
+2026-06-23 10:10:39  INFO      data_loader    B0026_full             →  28 cycles | cap 1.3863–1.8165 Ah | amb 24°C
+2026-06-23 10:10:39  INFO      data_loader    B0029_full             →  40 cycles | cap 1.6121–1.8447 Ah | amb 43°C
+2026-06-23 10:10:39  INFO      data_loader    B0030_full             →  40 cycles | cap 1.5628–1.7816 Ah | amb 43°C
+2026-06-23 10:10:40  INFO      data_loader    B0033_full             → 197 cycles | cap 0.0684–1.8851 Ah | amb 24°C
+2026-06-23 10:10:40  INFO      data_loader    B0034_full             → 197 cycles | cap 0.7459–1.8203 Ah | amb 24°C
+2026-06-23 10:10:40  INFO      data_loader    B0038_full             →  47 cycles | cap 0.8981–1.7864 Ah | amb 39°C
+2026-06-23 10:10:40  INFO      data_loader    B0041_full             →  67 cycles | cap 0.0441–1.2156 Ah | amb 4°C
+2026-06-23 10:10:40  INFO      data_loader    B0042_full             → 111 cycles | cap 0.0622–1.7315 Ah | amb 10°C
+2026-06-23 10:10:40  INFO      data_loader    B0043_full             → 111 cycles | cap 0.0565–1.7138 Ah | amb 10°C
+2026-06-23 10:10:41  INFO      data_loader    B0045_full             →  70 cycles | cap 0.6069–1.0820 Ah | amb 4°C
+2026-06-23 10:10:41  INFO      data_loader    B0046_full             →  69 cycles | cap 1.1237–1.7282 Ah | amb 4°C
+2026-06-23 10:10:41  INFO      data_loader    B0047_full             →  69 cycles | cap 1.1060–1.6743 Ah | amb 4°C
+2026-06-23 10:10:41  INFO      data_loader    B0049_full             →  24 cycles | cap 0.6914–2.3786 Ah | amb 4°C
+2026-06-23 10:10:41  INFO      data_loader    B0051_full             →  24 cycles | cap 0.6435–2.3309 Ah | amb 4°C
+2026-06-23 10:10:41  INFO      data_loader    B0053_full             →  55 cycles | cap 0.9801–1.1541 Ah | amb 4°C
+2026-06-23 10:10:41  INFO      data_loader    B0054_full             → 102 cycles | cap 0.7399–1.1665 Ah | amb 4°C
+2026-06-23 10:10:41  INFO      data_loader    B0055_full             → 102 cycles | cap 0.7990–1.3199 Ah | amb 4°C
+2026-06-23 10:10:41  INFO      data_loader    → 1717 total cycles | 20 batteries: ['B0005_full', 'B0006_full', 'B0025_full', 'B0026_full', 'B0029_full', 'B0030_full', 'B0033_full', 'B0034_full', 'B0038_full', 'B0041_full', 'B0042_full', 'B0043_full', 'B0045_full', 'B0046_full', 'B0047_full', 'B0049_full', 'B0051_full', 'B0053_full', 'B0054_full', 'B0055_full']
+2026-06-23 10:10:41  INFO      data_loader  Loading 5 files from 'NASA/Val' …
+2026-06-23 10:10:42  INFO      data_loader    B0018_full             → 132 cycles | cap 1.3411–1.8550 Ah | amb 24°C
+2026-06-23 10:10:42  INFO      data_loader    B0027_full             →  28 cycles | cap 1.7701–1.8233 Ah | amb 24°C
+2026-06-23 10:10:42  INFO      data_loader    B0031_full             →  40 cycles | cap 1.6667–1.8329 Ah | amb 43°C
+2026-06-23 10:10:42  INFO      data_loader    B0039_full             →  47 cycles | cap 0.1190–1.7716 Ah | amb 39°C
+2026-06-23 10:10:42  INFO      data_loader    B0050_full             →  20 cycles | cap 0.0326–2.6401 Ah | amb 4°C
+2026-06-23 10:10:42  INFO      data_loader    → 267 total cycles | 5 batteries: ['B0018_full', 'B0027_full', 'B0031_full', 'B0039_full', 'B0050_full']
+2026-06-23 10:10:42  INFO      data_loader  Loading 9 files from 'NASA/Test' …
+2026-06-23 10:10:42  INFO      data_loader    B0007_full             → 168 cycles | cap 1.4005–1.8911 Ah | amb 24°C
+2026-06-23 10:10:42  INFO      data_loader    B0028_full             →  28 cycles | cap 1.7172–1.8048 Ah | amb 24°C
+2026-06-23 10:10:42  INFO      data_loader    B0032_full             →  40 cycles | cap 1.6358–1.8940 Ah | amb 43°C
+2026-06-23 10:10:43  INFO      data_loader    B0036_full             → 197 cycles | cap 1.0020–2.4441 Ah | amb 24°C
+2026-06-23 10:10:43  INFO      data_loader    B0040_full             →  47 cycles | cap 0.4258–1.7341 Ah | amb 39°C
+2026-06-23 10:10:43  INFO      data_loader    B0044_full             → 111 cycles | cap 0.0551–1.6865 Ah | amb 10°C
+2026-06-23 10:10:43  INFO      data_loader    B0048_full             →  69 cycles | cap 1.1577–1.6580 Ah | amb 4°C
+2026-06-23 10:10:43  INFO      data_loader    B0052_full             →   4 cycles | cap 0.8607–1.4183 Ah | amb 4°C
+2026-06-23 10:10:43  INFO      data_loader    B0056_full             → 102 cycles | cap 0.7853–1.3444 Ah | amb 4°C
+2026-06-23 10:10:43  INFO      data_loader    → 766 total cycles | 9 batteries: ['B0007_full', 'B0028_full', 'B0032_full', 'B0036_full', 'B0040_full', 'B0044_full', 'B0048_full', 'B0052_full', 'B0056_full']
+2026-06-23 10:10:43  INFO      data_loader  ------------------------------------------------------------
+2026-06-23 10:10:43  INFO      data_loader  Train: 1717 cycles | 20 batteries
+2026-06-23 10:10:43  INFO      data_loader  Val  :  267 cycles | 5 batteries
+2026-06-23 10:10:43  INFO      data_loader  Test :  766 cycles | 9 batteries
+2026-06-23 10:10:43  INFO      data_loader  ============================================================
+2026-06-23 10:10:43  INFO      train_model  Samples  — Train: 1717 | Val: 267 | Test: 766
+2026-06-23 10:10:43  INFO      train_model  Features (15): ['cycle_index', 'V_measured', 'T_measured', 'ambient_temp', 'Re', 'Rct', 'Re_growth', 'Rct_growth', 'V_drop', 'cap_fade_rate', 'eol_proximity', 'Re_x_Rct', 'Rct_Re_ratio', 'V_Re_interaction', 'cycle_sq']
+2026-06-23 10:10:43  INFO      train_model  Fitting GBM pipeline …
+2026-06-23 10:10:44  INFO      train_model  Training complete in 0.38 s
+2026-06-23 10:10:44  INFO      train_model  ────────────────────────────────────────────────────────────────
+2026-06-23 10:10:44  INFO      train_model    Train  R²=0.9988  MAE=0.0108 Ah  RMSE=0.0158 Ah
+2026-06-23 10:10:44  INFO      train_model    Val    R²=0.5338  MAE=0.1243 Ah  RMSE=0.2622 Ah
+2026-06-23 10:10:44  INFO      train_model    Test   R²=0.6705  MAE=0.1791 Ah  RMSE=0.2468 Ah  ← cross-battery generalisation
+2026-06-23 10:10:44  INFO      train_model  ────────────────────────────────────────────────────────────────
+2026-06-23 10:10:44  INFO      train_model  Feature importances (top 10):
+2026-06-23 10:10:44  INFO      train_model    ambient_temp                  0.8285  █████████████████████████████████████████
+2026-06-23 10:10:44  INFO      train_model    T_measured                    0.0621  ███
+2026-06-23 10:10:44  INFO      train_model    V_measured                    0.0393  █
+2026-06-23 10:10:44  INFO      train_model    V_drop                        0.0107  
+2026-06-23 10:10:44  INFO      train_model    cycle_index                   0.0089  
+2026-06-23 10:10:44  INFO      train_model    Rct                           0.0088  
+2026-06-23 10:10:44  INFO      train_model    eol_proximity                 0.0086  
+2026-06-23 10:10:44  INFO      train_model    V_Re_interaction              0.0068  
+2026-06-23 10:10:44  INFO      train_model    Rct_Re_ratio                  0.0057  
+2026-06-23 10:10:44  INFO      train_model    Re                            0.0054  
+2026-06-23 10:10:44  INFO      train_model  Model   saved → model/xgb_battery_model.pkl
+2026-06-23 10:10:44  INFO      train_model  Metrics saved → model/model_meta.json
+2026-06-23 10:10:44  INFO      train_model  Loaded model from model/xgb_battery_model.pkl  (Test R²=0.6705  Val R²=0.5338  RMSE=0.2468 Ah)
+2026-06-23 10:14:56  INFO      train_model  XGBoost found — using XGBRegressor
+2026-06-23 10:14:56  INFO      __main__  Starting NASA Battery BMS — SOH & RUL Forecasting …
+2026-06-23 10:14:56  INFO      train_model  Loaded model from model/xgb_battery_model.pkl  (Test R²=0.6705  Val R²=0.5338  RMSE=0.2468 Ah)
+2026-06-23 10:14:56  INFO      train_rul_model  RUL model loaded from model/xgb_rul_model.pkl
+2026-06-23 10:14:56  INFO      __main__  API ready → http://0.0.0.0:5002
+2026-06-23 10:26:10  INFO      __main__  Generating physics-informed RUL training data (300 simulated cells) …
+2026-06-23 10:26:11  INFO      __main__  RUL dataset: 236717 rows | RUL range 0–1478 cycles
+2026-06-23 10:26:11  INFO      __main__  Fitting RUL model …
+2026-06-23 10:26:12  INFO      __main__  RUL model — Test R²=0.9918  MAE=20.3 cycles  RMSE=26.4 cycles
+2026-06-23 10:26:12  INFO      __main__  RUL feature importances: {'capacity_ah': 0.49, 'soh_pct': 0.272, 'cycle_rate': 0.107, 'avg_temp_C': 0.038, 'deep_rate': 0.034, 'avg_dod': 0.031, 'cycle_index': 0.028}
+2026-06-23 10:26:12  INFO      __main__  RUL model saved → model/xgb_rul_model.pkl  (0.66 s)
+2026-06-23 10:26:15  INFO      train_model  XGBoost found — using XGBRegressor
+2026-06-23 10:26:15  INFO      __main__  Starting NASA Battery BMS — SOH & RUL Forecasting …
+2026-06-23 10:26:15  INFO      train_model  Loaded model from model/xgb_battery_model.pkl  (Test R²=0.6705  Val R²=0.5338  RMSE=0.2468 Ah)
+2026-06-23 10:26:15  INFO      train_rul_model  RUL model loaded from model/xgb_rul_model.pkl
+2026-06-23 10:26:15  INFO      __main__  API ready → http://0.0.0.0:5002
+2026-06-23 10:26:37  INFO      __main__  predict: cycle=50 V=4.190 Re=0.0440 Rct=0.0690 T=24.3 → cap=1.0200 Ah SOH=51.0% RUL=247
+2026-06-23 10:27:04  INFO      __main__  predict: cycle=50 V=4.190 Re=0.0440 Rct=0.0690 T=24.3 → cap=1.0200 Ah SOH=51.0% RUL=247
+2026-06-23 10:27:06  INFO      __main__  predict: cycle=50 V=4.190 Re=0.0440 Rct=0.0690 T=24.3 → cap=1.0200 Ah SOH=51.0% RUL=247
+2026-06-23 10:27:06  INFO      __main__  predict: cycle=50 V=4.190 Re=0.0440 Rct=0.0690 T=24.3 → cap=1.0200 Ah SOH=51.0% RUL=247
+2026-06-23 10:27:27  INFO      __main__  predict: cycle=50 V=4.190 Re=0.0290 Rct=0.0530 T=24.3 → cap=1.0709 Ah SOH=53.5% RUL=247
+2026-06-23 10:27:28  INFO      __main__  predict: cycle=50 V=4.190 Re=0.0290 Rct=0.0530 T=24.3 → cap=1.0709 Ah SOH=53.5% RUL=247
+2026-06-23 10:27:28  INFO      __main__  predict: cycle=50 V=4.190 Re=0.0290 Rct=0.0530 T=24.3 → cap=1.0709 Ah SOH=53.5% RUL=247
+2026-06-23 10:37:43  INFO      __main__  XGBoost found — using XGBRegressor
+2026-06-23 10:37:43  INFO      data_loader  ============================================================
+2026-06-23 10:37:43  INFO      data_loader  Loading NASA Battery dataset (3-way split)
+2026-06-23 10:37:43  INFO      data_loader  ============================================================
+2026-06-23 10:37:43  INFO      data_loader  Loading 20 files from 'NASA/Train' …
+2026-06-23 10:37:44  INFO      data_loader    B0005_full             → 168 cycles | cap 1.2875–1.8565 Ah | amb 24°C
+2026-06-23 10:37:44  INFO      data_loader    B0006_full             → 168 cycles | cap 1.1538–2.0353 Ah | amb 24°C
+2026-06-23 10:37:44  INFO      data_loader    B0025_full             →  28 cycles | cap 1.7678–1.8490 Ah | amb 24°C
+2026-06-23 10:37:44  INFO      data_loader    B0026_full             →  28 cycles | cap 1.3863–1.8165 Ah | amb 24°C
+2026-06-23 10:37:44  INFO      data_loader    B0029_full             →  40 cycles | cap 1.6121–1.8447 Ah | amb 43°C
+2026-06-23 10:37:44  INFO      data_loader    B0030_full             →  40 cycles | cap 1.5628–1.7816 Ah | amb 43°C
+2026-06-23 10:37:45  INFO      data_loader    B0033_full             → 197 cycles | cap 0.0684–1.8851 Ah | amb 24°C
+2026-06-23 10:37:45  INFO      data_loader    B0034_full             → 197 cycles | cap 0.7459–1.8203 Ah | amb 24°C
+2026-06-23 10:37:45  INFO      data_loader    B0038_full             →  47 cycles | cap 0.8981–1.7864 Ah | amb 39°C
+2026-06-23 10:37:45  INFO      data_loader    B0041_full             →  67 cycles | cap 0.0441–1.2156 Ah | amb 4°C
+2026-06-23 10:37:45  INFO      data_loader    B0042_full             → 111 cycles | cap 0.0622–1.7315 Ah | amb 10°C
+2026-06-23 10:37:46  INFO      data_loader    B0043_full             → 111 cycles | cap 0.0565–1.7138 Ah | amb 10°C
+2026-06-23 10:37:46  INFO      data_loader    B0045_full             →  70 cycles | cap 0.6069–1.0820 Ah | amb 4°C
+2026-06-23 10:37:46  INFO      data_loader    B0046_full             →  69 cycles | cap 1.1237–1.7282 Ah | amb 4°C
+2026-06-23 10:37:46  INFO      data_loader    B0047_full             →  69 cycles | cap 1.1060–1.6743 Ah | amb 4°C
+2026-06-23 10:37:46  INFO      data_loader    B0049_full             →  24 cycles | cap 0.6914–2.3786 Ah | amb 4°C
+2026-06-23 10:37:46  INFO      data_loader    B0051_full             →  24 cycles | cap 0.6435–2.3309 Ah | amb 4°C
+2026-06-23 10:37:46  INFO      data_loader    B0053_full             →  55 cycles | cap 0.9801–1.1541 Ah | amb 4°C
+2026-06-23 10:37:46  INFO      data_loader    B0054_full             → 102 cycles | cap 0.7399–1.1665 Ah | amb 4°C
+2026-06-23 10:37:46  INFO      data_loader    B0055_full             → 102 cycles | cap 0.7990–1.3199 Ah | amb 4°C
+2026-06-23 10:37:46  INFO      data_loader    → 1717 total cycles | 20 batteries: ['B0005_full', 'B0006_full', 'B0025_full', 'B0026_full', 'B0029_full', 'B0030_full', 'B0033_full', 'B0034_full', 'B0038_full', 'B0041_full', 'B0042_full', 'B0043_full', 'B0045_full', 'B0046_full', 'B0047_full', 'B0049_full', 'B0051_full', 'B0053_full', 'B0054_full', 'B0055_full']
+2026-06-23 10:37:46  INFO      data_loader  Loading 5 files from 'NASA/Val' …
+2026-06-23 10:37:47  INFO      data_loader    B0018_full             → 132 cycles | cap 1.3411–1.8550 Ah | amb 24°C
+2026-06-23 10:37:47  INFO      data_loader    B0027_full             →  28 cycles | cap 1.7701–1.8233 Ah | amb 24°C
+2026-06-23 10:37:47  INFO      data_loader    B0031_full             →  40 cycles | cap 1.6667–1.8329 Ah | amb 43°C
+2026-06-23 10:37:47  INFO      data_loader    B0039_full             →  47 cycles | cap 0.1190–1.7716 Ah | amb 39°C
+2026-06-23 10:37:47  INFO      data_loader    B0050_full             →  20 cycles | cap 0.0326–2.6401 Ah | amb 4°C
+2026-06-23 10:37:47  INFO      data_loader    → 267 total cycles | 5 batteries: ['B0018_full', 'B0027_full', 'B0031_full', 'B0039_full', 'B0050_full']
+2026-06-23 10:37:47  INFO      data_loader  Loading 9 files from 'NASA/Test' …
+2026-06-23 10:37:47  INFO      data_loader    B0007_full             → 168 cycles | cap 1.4005–1.8911 Ah | amb 24°C
+2026-06-23 10:37:47  INFO      data_loader    B0028_full             →  28 cycles | cap 1.7172–1.8048 Ah | amb 24°C
+2026-06-23 10:37:48  INFO      data_loader    B0032_full             →  40 cycles | cap 1.6358–1.8940 Ah | amb 43°C
+2026-06-23 10:37:48  INFO      data_loader    B0036_full             → 197 cycles | cap 1.0020–2.4441 Ah | amb 24°C
+2026-06-23 10:37:48  INFO      data_loader    B0040_full             →  47 cycles | cap 0.4258–1.7341 Ah | amb 39°C
+2026-06-23 10:37:48  INFO      data_loader    B0044_full             → 111 cycles | cap 0.0551–1.6865 Ah | amb 10°C
+2026-06-23 10:37:48  INFO      data_loader    B0048_full             →  69 cycles | cap 1.1577–1.6580 Ah | amb 4°C
+2026-06-23 10:37:48  INFO      data_loader    B0052_full             →   4 cycles | cap 0.8607–1.4183 Ah | amb 4°C
+2026-06-23 10:37:48  INFO      data_loader    B0056_full             → 102 cycles | cap 0.7853–1.3444 Ah | amb 4°C
+2026-06-23 10:37:48  INFO      data_loader    → 766 total cycles | 9 batteries: ['B0007_full', 'B0028_full', 'B0032_full', 'B0036_full', 'B0040_full', 'B0044_full', 'B0048_full', 'B0052_full', 'B0056_full']
+2026-06-23 10:37:48  INFO      data_loader  ------------------------------------------------------------
+2026-06-23 10:37:48  INFO      data_loader  Train: 1717 cycles | 20 batteries
+2026-06-23 10:37:48  INFO      data_loader  Val  :  267 cycles | 5 batteries
+2026-06-23 10:37:48  INFO      data_loader  Test :  766 cycles | 9 batteries
+2026-06-23 10:37:48  INFO      data_loader  ============================================================
+2026-06-23 10:37:48  INFO      __main__  Samples  — Train: 1717 | Val: 267 | Test: 766
+2026-06-23 10:37:48  INFO      __main__  Features (15): ['cycle_index', 'V_measured', 'T_measured', 'ambient_temp', 'Re', 'Rct', 'Re_growth', 'Rct_growth', 'V_drop', 'cap_fade_rate', 'eol_proximity', 'Re_x_Rct', 'Rct_Re_ratio', 'V_Re_interaction', 'cycle_sq']
+2026-06-23 10:37:48  INFO      __main__  Fitting GBM pipeline …
+2026-06-23 10:37:49  INFO      __main__  Training complete in 0.31 s
+2026-06-23 10:37:49  INFO      __main__  ────────────────────────────────────────────────────────────────
+2026-06-23 10:37:49  INFO      __main__    Train  R²=0.9988  MAE=0.0108 Ah  RMSE=0.0158 Ah
+2026-06-23 10:37:49  INFO      __main__    Val    R²=0.5338  MAE=0.1243 Ah  RMSE=0.2622 Ah
+2026-06-23 10:37:49  INFO      __main__    Test   R²=0.6705  MAE=0.1791 Ah  RMSE=0.2468 Ah  ← cross-battery generalisation
+2026-06-23 10:37:49  INFO      __main__  ────────────────────────────────────────────────────────────────
+2026-06-23 10:37:49  INFO      __main__  Feature importances (top 10):
+2026-06-23 10:37:49  INFO      __main__    ambient_temp                  0.8285  █████████████████████████████████████████
+2026-06-23 10:37:49  INFO      __main__    T_measured                    0.0621  ███
+2026-06-23 10:37:49  INFO      __main__    V_measured                    0.0393  █
+2026-06-23 10:37:49  INFO      __main__    V_drop                        0.0107  
+2026-06-23 10:37:49  INFO      __main__    cycle_index                   0.0089  
+2026-06-23 10:37:49  INFO      __main__    Rct                           0.0088  
+2026-06-23 10:37:49  INFO      __main__    eol_proximity                 0.0086  
+2026-06-23 10:37:49  INFO      __main__    V_Re_interaction              0.0068  
+2026-06-23 10:37:49  INFO      __main__    Rct_Re_ratio                  0.0057  
+2026-06-23 10:37:49  INFO      __main__    Re                            0.0054  
+2026-06-23 10:37:49  INFO      __main__  Model   saved → model/xgb_battery_model.pkl
+2026-06-23 10:37:49  INFO      __main__  Metrics saved → model/model_meta.json
+2026-06-23 10:37:53  INFO      __main__  Generating physics-informed RUL training data (300 simulated cells) …
+2026-06-23 10:37:53  INFO      __main__  RUL dataset: 236717 rows | RUL range 0–1478 cycles
+2026-06-23 10:37:53  INFO      __main__  Fitting RUL model …
+2026-06-23 10:37:54  INFO      __main__  RUL model — Test R²=0.9918  MAE=20.3 cycles  RMSE=26.4 cycles
+2026-06-23 10:37:54  INFO      __main__  RUL feature importances: {'capacity_ah': 0.49, 'soh_pct': 0.272, 'cycle_rate': 0.107, 'avg_temp_C': 0.038, 'deep_rate': 0.034, 'avg_dod': 0.031, 'cycle_index': 0.028}
+2026-06-23 10:37:54  INFO      __main__  RUL model saved → model/xgb_rul_model.pkl  (0.67 s)
+2026-06-23 10:37:58  INFO      train_model  XGBoost found — using XGBRegressor
+2026-06-23 10:37:58  INFO      data_loader  ============================================================
+2026-06-23 10:37:58  INFO      data_loader  Loading NASA Battery dataset (3-way split)
+2026-06-23 10:37:58  INFO      data_loader  ============================================================
+2026-06-23 10:37:58  INFO      data_loader  Loading 20 files from 'NASA/Train' …
+2026-06-23 10:37:58  INFO      data_loader    B0005_full             → 168 cycles | cap 1.2875–1.8565 Ah | amb 24°C
+2026-06-23 10:37:59  INFO      data_loader    B0006_full             → 168 cycles | cap 1.1538–2.0353 Ah | amb 24°C
+2026-06-23 10:37:59  INFO      data_loader    B0025_full             →  28 cycles | cap 1.7678–1.8490 Ah | amb 24°C
+2026-06-23 10:37:59  INFO      data_loader    B0026_full             →  28 cycles | cap 1.3863–1.8165 Ah | amb 24°C
+2026-06-23 10:37:59  INFO      data_loader    B0029_full             →  40 cycles | cap 1.6121–1.8447 Ah | amb 43°C
+2026-06-23 10:37:59  INFO      data_loader    B0030_full             →  40 cycles | cap 1.5628–1.7816 Ah | amb 43°C
+2026-06-23 10:37:59  INFO      data_loader    B0033_full             → 197 cycles | cap 0.0684–1.8851 Ah | amb 24°C
+2026-06-23 10:37:59  INFO      data_loader    B0034_full             → 197 cycles | cap 0.7459–1.8203 Ah | amb 24°C
+2026-06-23 10:38:00  INFO      data_loader    B0038_full             →  47 cycles | cap 0.8981–1.7864 Ah | amb 39°C
+2026-06-23 10:38:00  INFO      data_loader    B0041_full             →  67 cycles | cap 0.0441–1.2156 Ah | amb 4°C
+2026-06-23 10:38:00  INFO      data_loader    B0042_full             → 111 cycles | cap 0.0622–1.7315 Ah | amb 10°C
+2026-06-23 10:38:00  INFO      data_loader    B0043_full             → 111 cycles | cap 0.0565–1.7138 Ah | amb 10°C
+2026-06-23 10:38:00  INFO      data_loader    B0045_full             →  70 cycles | cap 0.6069–1.0820 Ah | amb 4°C
+2026-06-23 10:38:00  INFO      data_loader    B0046_full             →  69 cycles | cap 1.1237–1.7282 Ah | amb 4°C
+2026-06-23 10:38:00  INFO      data_loader    B0047_full             →  69 cycles | cap 1.1060–1.6743 Ah | amb 4°C
+2026-06-23 10:38:00  INFO      data_loader    B0049_full             →  24 cycles | cap 0.6914–2.3786 Ah | amb 4°C
+2026-06-23 10:38:00  INFO      data_loader    B0051_full             →  24 cycles | cap 0.6435–2.3309 Ah | amb 4°C
+2026-06-23 10:38:01  INFO      data_loader    B0053_full             →  55 cycles | cap 0.9801–1.1541 Ah | amb 4°C
+2026-06-23 10:38:01  INFO      data_loader    B0054_full             → 102 cycles | cap 0.7399–1.1665 Ah | amb 4°C
+2026-06-23 10:38:01  INFO      data_loader    B0055_full             → 102 cycles | cap 0.7990–1.3199 Ah | amb 4°C
+2026-06-23 10:38:01  INFO      data_loader    → 1717 total cycles | 20 batteries: ['B0005_full', 'B0006_full', 'B0025_full', 'B0026_full', 'B0029_full', 'B0030_full', 'B0033_full', 'B0034_full', 'B0038_full', 'B0041_full', 'B0042_full', 'B0043_full', 'B0045_full', 'B0046_full', 'B0047_full', 'B0049_full', 'B0051_full', 'B0053_full', 'B0054_full', 'B0055_full']
+2026-06-23 10:38:01  INFO      data_loader  Loading 5 files from 'NASA/Val' …
+2026-06-23 10:38:01  INFO      data_loader    B0018_full             → 132 cycles | cap 1.3411–1.8550 Ah | amb 24°C
+2026-06-23 10:38:01  INFO      data_loader    B0027_full             →  28 cycles | cap 1.7701–1.8233 Ah | amb 24°C
+2026-06-23 10:38:01  INFO      data_loader    B0031_full             →  40 cycles | cap 1.6667–1.8329 Ah | amb 43°C
+2026-06-23 10:38:01  INFO      data_loader    B0039_full             →  47 cycles | cap 0.1190–1.7716 Ah | amb 39°C
+2026-06-23 10:38:01  INFO      data_loader    B0050_full             →  20 cycles | cap 0.0326–2.6401 Ah | amb 4°C
+2026-06-23 10:38:01  INFO      data_loader    → 267 total cycles | 5 batteries: ['B0018_full', 'B0027_full', 'B0031_full', 'B0039_full', 'B0050_full']
+2026-06-23 10:38:01  INFO      data_loader  Loading 9 files from 'NASA/Test' …
+2026-06-23 10:38:02  INFO      data_loader    B0007_full             → 168 cycles | cap 1.4005–1.8911 Ah | amb 24°C
+2026-06-23 10:38:02  INFO      data_loader    B0028_full             →  28 cycles | cap 1.7172–1.8048 Ah | amb 24°C
+2026-06-23 10:38:02  INFO      data_loader    B0032_full             →  40 cycles | cap 1.6358–1.8940 Ah | amb 43°C
+2026-06-23 10:38:02  INFO      data_loader    B0036_full             → 197 cycles | cap 1.0020–2.4441 Ah | amb 24°C
+2026-06-23 10:38:02  INFO      data_loader    B0040_full             →  47 cycles | cap 0.4258–1.7341 Ah | amb 39°C
+2026-06-23 10:38:03  INFO      data_loader    B0044_full             → 111 cycles | cap 0.0551–1.6865 Ah | amb 10°C
+2026-06-23 10:38:03  INFO      data_loader    B0048_full             →  69 cycles | cap 1.1577–1.6580 Ah | amb 4°C
+2026-06-23 10:38:03  INFO      data_loader    B0052_full             →   4 cycles | cap 0.8607–1.4183 Ah | amb 4°C
+2026-06-23 10:38:03  INFO      data_loader    B0056_full             → 102 cycles | cap 0.7853–1.3444 Ah | amb 4°C
+2026-06-23 10:38:03  INFO      data_loader    → 766 total cycles | 9 batteries: ['B0007_full', 'B0028_full', 'B0032_full', 'B0036_full', 'B0040_full', 'B0044_full', 'B0048_full', 'B0052_full', 'B0056_full']
+2026-06-23 10:38:03  INFO      data_loader  ------------------------------------------------------------
+2026-06-23 10:38:03  INFO      data_loader  Train: 1717 cycles | 20 batteries
+2026-06-23 10:38:03  INFO      data_loader  Val  :  267 cycles | 5 batteries
+2026-06-23 10:38:03  INFO      data_loader  Test :  766 cycles | 9 batteries
+2026-06-23 10:38:03  INFO      data_loader  ============================================================
+2026-06-23 10:38:03  INFO      data_loader    B0041_full             →  67 cycles | cap 0.0441–1.2156 Ah | amb 4°C
+2026-06-23 10:38:03  INFO      data_loader    B0041_full             →  67 cycles | cap 0.0441–1.2156 Ah | amb 4°C
+2026-06-23 10:38:03  INFO      data_loader    B0041_full             →  67 cycles | cap 0.0441–1.2156 Ah | amb 4°C
+2026-06-23 10:38:03  INFO      data_loader    B0041_full             →  67 cycles | cap 0.0441–1.2156 Ah | amb 4°C
+2026-06-23 10:38:03  INFO      data_loader  ============================================================
+2026-06-23 10:38:03  INFO      data_loader  Loading NASA Battery dataset (3-way split)
+2026-06-23 10:38:03  INFO      data_loader  ============================================================
+2026-06-23 10:38:03  INFO      data_loader  Loading 20 files from 'NASA/Train' …
+2026-06-23 10:38:04  INFO      data_loader    B0005_full             → 168 cycles | cap 1.2875–1.8565 Ah | amb 24°C
+2026-06-23 10:38:04  INFO      data_loader    B0006_full             → 168 cycles | cap 1.1538–2.0353 Ah | amb 24°C
+2026-06-23 10:38:04  INFO      data_loader    B0025_full             →  28 cycles | cap 1.7678–1.8490 Ah | amb 24°C
+2026-06-23 10:38:04  INFO      data_loader    B0026_full             →  28 cycles | cap 1.3863–1.8165 Ah | amb 24°C
+2026-06-23 10:38:04  INFO      data_loader    B0029_full             →  40 cycles | cap 1.6121–1.8447 Ah | amb 43°C
+2026-06-23 10:38:04  INFO      data_loader    B0030_full             →  40 cycles | cap 1.5628–1.7816 Ah | amb 43°C
+2026-06-23 10:38:05  INFO      data_loader    B0033_full             → 197 cycles | cap 0.0684–1.8851 Ah | amb 24°C
+2026-06-23 10:38:05  INFO      data_loader    B0034_full             → 197 cycles | cap 0.7459–1.8203 Ah | amb 24°C
+2026-06-23 10:38:05  INFO      data_loader    B0038_full             →  47 cycles | cap 0.8981–1.7864 Ah | amb 39°C
+2026-06-23 10:38:05  INFO      data_loader    B0041_full             →  67 cycles | cap 0.0441–1.2156 Ah | amb 4°C
+2026-06-23 10:38:05  INFO      data_loader    B0042_full             → 111 cycles | cap 0.0622–1.7315 Ah | amb 10°C
+2026-06-23 10:38:06  INFO      data_loader    B0043_full             → 111 cycles | cap 0.0565–1.7138 Ah | amb 10°C
+2026-06-23 10:38:06  INFO      data_loader    B0045_full             →  70 cycles | cap 0.6069–1.0820 Ah | amb 4°C
+2026-06-23 10:38:06  INFO      data_loader    B0046_full             →  69 cycles | cap 1.1237–1.7282 Ah | amb 4°C
+2026-06-23 10:38:06  INFO      data_loader    B0047_full             →  69 cycles | cap 1.1060–1.6743 Ah | amb 4°C
+2026-06-23 10:38:06  INFO      data_loader    B0049_full             →  24 cycles | cap 0.6914–2.3786 Ah | amb 4°C
+2026-06-23 10:38:06  INFO      data_loader    B0051_full             →  24 cycles | cap 0.6435–2.3309 Ah | amb 4°C
+2026-06-23 10:38:06  INFO      data_loader    B0053_full             →  55 cycles | cap 0.9801–1.1541 Ah | amb 4°C
+2026-06-23 10:38:06  INFO      data_loader    B0054_full             → 102 cycles | cap 0.7399–1.1665 Ah | amb 4°C
+2026-06-23 10:38:06  INFO      data_loader    B0055_full             → 102 cycles | cap 0.7990–1.3199 Ah | amb 4°C
+2026-06-23 10:38:06  INFO      data_loader    → 1717 total cycles | 20 batteries: ['B0005_full', 'B0006_full', 'B0025_full', 'B0026_full', 'B0029_full', 'B0030_full', 'B0033_full', 'B0034_full', 'B0038_full', 'B0041_full', 'B0042_full', 'B0043_full', 'B0045_full', 'B0046_full', 'B0047_full', 'B0049_full', 'B0051_full', 'B0053_full', 'B0054_full', 'B0055_full']
+2026-06-23 10:38:06  INFO      data_loader  Loading 5 files from 'NASA/Val' …
+2026-06-23 10:38:07  INFO      data_loader    B0018_full             → 132 cycles | cap 1.3411–1.8550 Ah | amb 24°C
+2026-06-23 10:38:07  INFO      data_loader    B0027_full             →  28 cycles | cap 1.7701–1.8233 Ah | amb 24°C
+2026-06-23 10:38:07  INFO      data_loader    B0031_full             →  40 cycles | cap 1.6667–1.8329 Ah | amb 43°C
+2026-06-23 10:38:07  INFO      data_loader    B0039_full             →  47 cycles | cap 0.1190–1.7716 Ah | amb 39°C
+2026-06-23 10:38:07  INFO      data_loader    B0050_full             →  20 cycles | cap 0.0326–2.6401 Ah | amb 4°C
+2026-06-23 10:38:07  INFO      data_loader    → 267 total cycles | 5 batteries: ['B0018_full', 'B0027_full', 'B0031_full', 'B0039_full', 'B0050_full']
+2026-06-23 10:38:07  INFO      data_loader  Loading 9 files from 'NASA/Test' …
+2026-06-23 10:38:07  INFO      data_loader    B0007_full             → 168 cycles | cap 1.4005–1.8911 Ah | amb 24°C
+2026-06-23 10:38:08  INFO      data_loader    B0028_full             →  28 cycles | cap 1.7172–1.8048 Ah | amb 24°C
+2026-06-23 10:38:08  INFO      data_loader    B0032_full             →  40 cycles | cap 1.6358–1.8940 Ah | amb 43°C
+2026-06-23 10:38:08  INFO      data_loader    B0036_full             → 197 cycles | cap 1.0020–2.4441 Ah | amb 24°C
+2026-06-23 10:38:08  INFO      data_loader    B0040_full             →  47 cycles | cap 0.4258–1.7341 Ah | amb 39°C
+2026-06-23 10:38:08  INFO      data_loader    B0044_full             → 111 cycles | cap 0.0551–1.6865 Ah | amb 10°C
+2026-06-23 10:38:08  INFO      data_loader    B0048_full             →  69 cycles | cap 1.1577–1.6580 Ah | amb 4°C
+2026-06-23 10:38:08  INFO      data_loader    B0052_full             →   4 cycles | cap 0.8607–1.4183 Ah | amb 4°C
+2026-06-23 10:38:09  INFO      data_loader    B0056_full             → 102 cycles | cap 0.7853–1.3444 Ah | amb 4°C
+2026-06-23 10:38:09  INFO      data_loader    → 766 total cycles | 9 batteries: ['B0007_full', 'B0028_full', 'B0032_full', 'B0036_full', 'B0040_full', 'B0044_full', 'B0048_full', 'B0052_full', 'B0056_full']
+2026-06-23 10:38:09  INFO      data_loader  ------------------------------------------------------------
+2026-06-23 10:38:09  INFO      data_loader  Train: 1717 cycles | 20 batteries
+2026-06-23 10:38:09  INFO      data_loader  Val  :  267 cycles | 5 batteries
+2026-06-23 10:38:09  INFO      data_loader  Test :  766 cycles | 9 batteries
+2026-06-23 10:38:09  INFO      data_loader  ============================================================
+2026-06-23 10:38:09  INFO      data_loader  ============================================================
+2026-06-23 10:38:09  INFO      data_loader  Loading NASA Battery dataset (3-way split)
+2026-06-23 10:38:09  INFO      data_loader  ============================================================
+2026-06-23 10:38:09  INFO      data_loader  Loading 20 files from 'NASA/Train' …
+2026-06-23 10:38:09  INFO      data_loader    B0005_full             → 168 cycles | cap 1.2875–1.8565 Ah | amb 24°C
+2026-06-23 10:38:09  INFO      data_loader    B0006_full             → 168 cycles | cap 1.1538–2.0353 Ah | amb 24°C
+2026-06-23 10:38:09  INFO      data_loader    B0025_full             →  28 cycles | cap 1.7678–1.8490 Ah | amb 24°C
+2026-06-23 10:38:10  INFO      data_loader    B0026_full             →  28 cycles | cap 1.3863–1.8165 Ah | amb 24°C
+2026-06-23 10:38:10  INFO      data_loader    B0029_full             →  40 cycles | cap 1.6121–1.8447 Ah | amb 43°C
+2026-06-23 10:38:10  INFO      data_loader    B0030_full             →  40 cycles | cap 1.5628–1.7816 Ah | amb 43°C
+2026-06-23 10:38:10  INFO      data_loader    B0033_full             → 197 cycles | cap 0.0684–1.8851 Ah | amb 24°C
+2026-06-23 10:38:10  INFO      data_loader    B0034_full             → 197 cycles | cap 0.7459–1.8203 Ah | amb 24°C
+2026-06-23 10:38:10  INFO      data_loader    B0038_full             →  47 cycles | cap 0.8981–1.7864 Ah | amb 39°C
+2026-06-23 10:38:10  INFO      data_loader    B0041_full             →  67 cycles | cap 0.0441–1.2156 Ah | amb 4°C
+2026-06-23 10:38:11  INFO      data_loader    B0042_full             → 111 cycles | cap 0.0622–1.7315 Ah | amb 10°C
+2026-06-23 10:38:11  INFO      data_loader    B0043_full             → 111 cycles | cap 0.0565–1.7138 Ah | amb 10°C
+2026-06-23 10:38:11  INFO      data_loader    B0045_full             →  70 cycles | cap 0.6069–1.0820 Ah | amb 4°C
+2026-06-23 10:38:11  INFO      data_loader    B0046_full             →  69 cycles | cap 1.1237–1.7282 Ah | amb 4°C
+2026-06-23 10:38:11  INFO      data_loader    B0047_full             →  69 cycles | cap 1.1060–1.6743 Ah | amb 4°C
+2026-06-23 10:38:11  INFO      data_loader    B0049_full             →  24 cycles | cap 0.6914–2.3786 Ah | amb 4°C
+2026-06-23 10:38:11  INFO      data_loader    B0051_full             →  24 cycles | cap 0.6435–2.3309 Ah | amb 4°C
+2026-06-23 10:38:11  INFO      data_loader    B0053_full             →  55 cycles | cap 0.9801–1.1541 Ah | amb 4°C
+2026-06-23 10:38:12  INFO      data_loader    B0054_full             → 102 cycles | cap 0.7399–1.1665 Ah | amb 4°C
+2026-06-23 10:38:12  INFO      data_loader    B0055_full             → 102 cycles | cap 0.7990–1.3199 Ah | amb 4°C
+2026-06-23 10:38:12  INFO      data_loader    → 1717 total cycles | 20 batteries: ['B0005_full', 'B0006_full', 'B0025_full', 'B0026_full', 'B0029_full', 'B0030_full', 'B0033_full', 'B0034_full', 'B0038_full', 'B0041_full', 'B0042_full', 'B0043_full', 'B0045_full', 'B0046_full', 'B0047_full', 'B0049_full', 'B0051_full', 'B0053_full', 'B0054_full', 'B0055_full']
+2026-06-23 10:38:12  INFO      data_loader  Loading 5 files from 'NASA/Val' …
+2026-06-23 10:38:12  INFO      data_loader    B0018_full             → 132 cycles | cap 1.3411–1.8550 Ah | amb 24°C
+2026-06-23 10:38:12  INFO      data_loader    B0027_full             →  28 cycles | cap 1.7701–1.8233 Ah | amb 24°C
+2026-06-23 10:38:12  INFO      data_loader    B0031_full             →  40 cycles | cap 1.6667–1.8329 Ah | amb 43°C
+2026-06-23 10:38:12  INFO      data_loader    B0039_full             →  47 cycles | cap 0.1190–1.7716 Ah | amb 39°C
+2026-06-23 10:38:12  INFO      data_loader    B0050_full             →  20 cycles | cap 0.0326–2.6401 Ah | amb 4°C
+2026-06-23 10:38:12  INFO      data_loader    → 267 total cycles | 5 batteries: ['B0018_full', 'B0027_full', 'B0031_full', 'B0039_full', 'B0050_full']
+2026-06-23 10:38:12  INFO      data_loader  Loading 9 files from 'NASA/Test' …
+2026-06-23 10:38:13  INFO      data_loader    B0007_full             → 168 cycles | cap 1.4005–1.8911 Ah | amb 24°C
+2026-06-23 10:38:13  INFO      data_loader    B0028_full             →  28 cycles | cap 1.7172–1.8048 Ah | amb 24°C
+2026-06-23 10:38:13  INFO      data_loader    B0032_full             →  40 cycles | cap 1.6358–1.8940 Ah | amb 43°C
+2026-06-23 10:38:13  INFO      data_loader    B0036_full             → 197 cycles | cap 1.0020–2.4441 Ah | amb 24°C
+2026-06-23 10:38:13  INFO      data_loader    B0040_full             →  47 cycles | cap 0.4258–1.7341 Ah | amb 39°C
+2026-06-23 10:38:13  INFO      data_loader    B0044_full             → 111 cycles | cap 0.0551–1.6865 Ah | amb 10°C
+2026-06-23 10:38:13  INFO      data_loader    B0048_full             →  69 cycles | cap 1.1577–1.6580 Ah | amb 4°C
+2026-06-23 10:38:14  INFO      data_loader    B0052_full             →   4 cycles | cap 0.8607–1.4183 Ah | amb 4°C
+2026-06-23 10:38:14  INFO      data_loader    B0056_full             → 102 cycles | cap 0.7853–1.3444 Ah | amb 4°C
+2026-06-23 10:38:14  INFO      data_loader    → 766 total cycles | 9 batteries: ['B0007_full', 'B0028_full', 'B0032_full', 'B0036_full', 'B0040_full', 'B0044_full', 'B0048_full', 'B0052_full', 'B0056_full']
+2026-06-23 10:38:14  INFO      data_loader  ------------------------------------------------------------
+2026-06-23 10:38:14  INFO      data_loader  Train: 1717 cycles | 20 batteries
+2026-06-23 10:38:14  INFO      data_loader  Val  :  267 cycles | 5 batteries
+2026-06-23 10:38:14  INFO      data_loader  Test :  766 cycles | 9 batteries
+2026-06-23 10:38:14  INFO      data_loader  ============================================================
+2026-06-23 10:38:14  INFO      train_model  Force-synthetic mode — ignoring real CSVs
+2026-06-23 10:38:14  INFO      train_model  Samples  — Train: 5000 | Val: 1000 | Test: 1500
+2026-06-23 10:38:14  INFO      train_model  Features (15): ['cycle_index', 'V_measured', 'T_measured', 'ambient_temp', 'Re', 'Rct', 'Re_growth', 'Rct_growth', 'V_drop', 'cap_fade_rate', 'eol_proximity', 'Re_x_Rct', 'Rct_Re_ratio', 'V_Re_interaction', 'cycle_sq']
+2026-06-23 10:38:14  INFO      train_model  Fitting GBM pipeline …
+2026-06-23 10:38:14  INFO      train_model  Training complete in 0.26 s
+2026-06-23 10:38:14  INFO      train_model  ────────────────────────────────────────────────────────────────
+2026-06-23 10:38:14  INFO      train_model    Train  R²=0.9997  MAE=0.0023 Ah  RMSE=0.0029 Ah
+2026-06-23 10:38:14  INFO      train_model    Val    R²=0.9995  MAE=0.0031 Ah  RMSE=0.0045 Ah
+2026-06-23 10:38:14  INFO      train_model    Test   R²=0.9995  MAE=0.0028 Ah  RMSE=0.0041 Ah  ← cross-battery generalisation
+2026-06-23 10:38:14  INFO      train_model  ────────────────────────────────────────────────────────────────
+2026-06-23 10:38:14  INFO      train_model  Feature importances (top 10):
+2026-06-23 10:38:14  INFO      train_model    ambient_temp                  0.9413  ███████████████████████████████████████████████
+2026-06-23 10:38:14  INFO      train_model    T_measured                    0.0208  █
+2026-06-23 10:38:14  INFO      train_model    eol_proximity                 0.0203  █
+2026-06-23 10:38:14  INFO      train_model    cycle_index                   0.0085  
+2026-06-23 10:38:14  INFO      train_model    Re                            0.0057  
+2026-06-23 10:38:14  INFO      train_model    Re_growth                     0.0020  
+2026-06-23 10:38:14  INFO      train_model    Rct                           0.0009  
+2026-06-23 10:38:14  INFO      train_model    cycle_sq                      0.0003  
+2026-06-23 10:38:14  INFO      train_model    Re_x_Rct                      0.0001  
+2026-06-23 10:38:14  INFO      train_model    Rct_growth                    0.0000  
+2026-06-23 10:38:14  INFO      train_model  Model   saved → model/xgb_battery_model.pkl
+2026-06-23 10:38:14  INFO      train_model  Metrics saved → model/model_meta.json
+2026-06-23 10:38:18  INFO      train_model  XGBoost found — using XGBRegressor
+2026-06-23 10:38:18  INFO      __main__  Starting NASA Battery BMS — SOH & RUL Forecasting …
+2026-06-23 10:38:18  INFO      train_model  Loaded model from model/xgb_battery_model.pkl  (Test R²=0.9995  Val R²=0.9995  RMSE=0.0041 Ah)
+2026-06-23 10:38:18  INFO      train_rul_model  RUL model loaded from model/xgb_rul_model.pkl
+2026-06-23 10:38:18  INFO      __main__  API ready → http://0.0.0.0:5002
+2026-06-23 10:38:30  INFO      __main__  predict: cycle=50 V=4.190 Re=0.0440 Rct=0.0690 T=24.3 → cap=1.6841 Ah SOH=84.2% RUL=350
+2026-06-23 10:38:59  INFO      __main__  predict: cycle=6 V=4.165 Re=0.0440 Rct=0.0690 T=24.3 → cap=1.7162 Ah SOH=85.8% RUL=402
+2026-06-23 10:38:59  INFO      __main__  predict: cycle=6 V=4.165 Re=0.0440 Rct=0.0690 T=24.3 → cap=1.7162 Ah SOH=85.8% RUL=402
+2026-06-23 10:39:00  INFO      __main__  predict: cycle=6 V=4.165 Re=0.0440 Rct=0.0690 T=24.3 → cap=1.7162 Ah SOH=85.8% RUL=402
+2026-06-23 10:39:00  INFO      __main__  predict: cycle=6 V=4.165 Re=0.0440 Rct=0.0690 T=24.3 → cap=1.7162 Ah SOH=85.8% RUL=402
+2026-06-23 10:39:13  INFO      __main__  predict: cycle=6 V=2.165 Re=0.0440 Rct=0.0690 T=21.3 → cap=1.2976 Ah SOH=64.9% RUL=334
+2026-06-23 10:39:14  INFO      __main__  predict: cycle=6 V=2.165 Re=0.0440 Rct=0.0690 T=21.3 → cap=1.2976 Ah SOH=64.9% RUL=334
+2026-06-23 10:44:42  INFO      train_model  XGBoost found — using XGBRegressor
+2026-06-23 10:44:42  INFO      __main__  Starting NASA Battery BMS — SOH & RUL Forecasting …
+2026-06-23 10:44:42  INFO      train_model  Loaded model from model/xgb_battery_model.pkl  (Test R²=0.9995  Val R²=0.9995  RMSE=0.0041 Ah)
+2026-06-23 10:44:42  INFO      train_rul_model  RUL model loaded from model/xgb_rul_model.pkl
+2026-06-23 10:44:42  INFO      __main__  API ready → http://0.0.0.0:5002
+2026-06-23 10:44:55  INFO      __main__  predict: cycle=50 V=4.190 Re=0.0440 Rct=0.0690 T=24.3 → cap=1.3115 Ah SOH=65.6% RUL=338
+2026-06-23 10:46:19  INFO      __main__  predict: cycle=50 V=4.190 Re=0.0440 Rct=0.0690 T=24.3 → cap=1.6841 Ah SOH=84.2% RUL=350
+2026-06-23 10:47:59  INFO      train_model  XGBoost found — using XGBRegressor
+2026-06-23 10:47:59  INFO      __main__  Starting NASA Battery BMS — SOH & RUL Forecasting …
+2026-06-23 10:47:59  INFO      train_model  Loaded model from model/xgb_battery_model.pkl  (Test R²=0.9995  Val R²=0.9995  RMSE=0.0041 Ah)
+2026-06-23 10:47:59  INFO      train_rul_model  RUL model loaded from model/xgb_rul_model.pkl
+2026-06-23 10:47:59  INFO      __main__  API ready → http://0.0.0.0:5002
+2026-06-23 10:48:14  INFO      __main__  predict: cycle=50 V=4.190 Re=0.0440 Rct=0.0690 T=24.3 → cap=1.3115 Ah SOH=65.6% RUL=338
+2026-06-23 10:48:23  INFO      __main__  predict: cycle=50 V=4.190 Re=0.0440 Rct=0.0690 T=24.3 → cap=1.6841 Ah SOH=84.2% RUL=350
+2026-06-23 10:48:24  INFO      __main__  predict: cycle=50 V=4.190 Re=0.0440 Rct=0.0690 T=24.3 → cap=1.6841 Ah SOH=84.2% RUL=350
+2026-06-23 11:09:49  INFO      train_model  XGBoost found — using XGBRegressor
+2026-06-23 11:09:49  INFO      __main__  Starting NASA Battery BMS — SOH & RUL Forecasting …
+2026-06-23 11:09:49  INFO      train_model  Loaded model from model/xgb_battery_model.pkl  (Test R²=0.9995  Val R²=0.9995  RMSE=0.0041 Ah)
+2026-06-23 11:09:49  INFO      train_rul_model  RUL model loaded from model/xgb_rul_model.pkl
+2026-06-23 11:09:49  INFO      __main__  API ready → http://0.0.0.0:5002
+2026-06-23 11:09:58  INFO      __main__  predict: cycle=50 V=4.190 Re=0.0440 Rct=0.0690 T=24.3 → cap=1.3115 Ah SOH=65.6% RUL=338
