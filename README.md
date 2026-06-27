@@ -76,46 +76,6 @@ Every CSV in each folder is loaded automatically — no battery IDs are hardcode
 
 ---
 
-## Quick Start
-
-### 1. Install dependencies
-```bash
-pip install -r requirements.txt
-```
-
-XGBoost is strongly recommended but optional — sklearn `GradientBoostingRegressor` is used automatically if XGBoost is not installed:
-```bash
-pip install xgboost
-```
-
-### 2. Place NASA CSVs
-```bash
-mkdir -p NASA/Train NASA/Val NASA/Test
-# Copy all *_full.csv files to their respective folders
-```
-
-### 3. Train
-```bash
-python train_model.py          # SOH/capacity model → model/xgb_battery_model.pkl
-python train_rul_model.py      # RUL model          → model/xgb_rul_model.pkl
-```
-
-Force synthetic data (no CSVs needed):
-```bash
-python train_model.py --synthetic
-```
-
-### 4. Run tests
-```bash
-python test_model.py           # 46 tests; CSV tests auto-enable when data is present
-```
-
-### 5. Launch dashboard
-```bash
-python app.py                  # → http://localhost:5002
-```
-
----
 
 ## API Endpoints
 
@@ -152,26 +112,6 @@ python app.py                  # → http://localhost:5002
 }
 ```
 
-### `/api/predict` — response
-
-```json
-{
-  "status": "ok",
-  "predicted_capacity_ah": 1.812,
-  "raw_capacity_ah": 1.945,
-  "soh_pct": 90.6,
-  "rul_cycles": 284,
-  "days_remaining": 284.0,
-  "health_grade": "Excellent",
-  "temp_factor": 1.0,
-  "cycle_factor": 0.99,
-  "at_eol": false,
-  "near_eol": false,
-  "dod_vs_eol": "Normal operation — battery is healthy"
-}
-```
-
----
 
 ## Dashboard
 
@@ -185,21 +125,7 @@ The web dashboard at `http://localhost:5002` provides:
 
 ---
 
-## Key Design Decisions
 
-**No hardcoded battery IDs** — every `*.csv` in each folder is loaded automatically. Add or remove batteries by moving files.
-
-**Complex Re/Rct strings** — some batteries store impedance measurements as complex numbers e.g. `(0.048+0j)`. The loader extracts the real part automatically.
-
-**Minimum capacity filter** — cycles with capacity ≤ 0.01 Ah are dropped (removes zero/near-zero outliers). All other test protocols including low-current 4°C pulse tests are preserved.
-
-**ambient_temp as a feature** — batteries tested at 4°C vs 24°C differ significantly in measured capacity. Including ambient temperature allows the model to generalise across test conditions.
-
-**3-way split reporting** — Train, Val, and Test R²/MAE are all logged and saved to `model_meta.json`. The Actual vs Predicted chart uses val split predictions so test data is never exposed to the visualisation layer.
-
-**Synthetic fallback** — if any folder is empty or missing, that split is replaced with physics-informed synthetic data so the pipeline always runs end-to-end.
-
----
 
 ## Requirements
 
